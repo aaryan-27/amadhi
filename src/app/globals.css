@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* ─── Amadhi Design Tokens ─────────────────────────────────────────────
+   Derived from Amadhi Brand Guidelines:
+   midnight navy #040C1E / #0A0E1D, warm cream #F4E3D1, terracotta accent.
+──────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Brand */
+  --color-navy-950: #040c1e;
+  --color-navy-900: #0a0f1f;
+  --color-navy-800: #111a33;
+  --color-navy-700: #1a2547;
+  --color-navy-600: #26355f;
+  --color-navy-500: #3a4c7e;
+  --color-navy-400: #5f719f;
+  --color-navy-300: #8b9abd;
+  --color-navy-200: #bcc6da;
+  --color-navy-100: #dde3ee;
+  --color-navy-50: #eef1f7;
+
+  --color-cream-300: #ecd9c2;
+  --color-cream-200: #f4e3d1;
+  --color-cream-100: #f9efe2;
+  --color-cream-50: #fcf7ef;
+
+  /* Vibrant terracotta-orange — primary accent */
+  --color-accent-700: #a83815;
+  --color-accent-600: #cc4517;
+  --color-accent-500: #e8541f;
+  --color-accent-400: #f2764a;
+  --color-accent-100: #fde3d7;
+  --color-accent-50: #fef2ec;
+
+  /* Teal — secondary accent (from the brochure tagline) */
+  --color-teal-700: #0b6e5f;
+  --color-teal-600: #0d8a75;
+  --color-teal-500: #10a58c;
+  --color-teal-400: #35c4ab;
+  --color-teal-100: #d3f4ec;
+  --color-teal-50: #ecfaf6;
+
+  /* Gold — highlight accent */
+  --color-gold-500: #eda012;
+  --color-gold-400: #f4b63f;
+  --color-gold-100: #fdeecb;
+  --color-gold-50: #fef8ea;
+
+  /* Supporting category hues */
+  --color-sky-strong: #0284c7;
+  --color-sky-soft: #e0f2fe;
+  --color-violet-strong: #7c3aed;
+  --color-violet-soft: #ede9fe;
+  --color-rose-strong: #e11d48;
+  --color-rose-soft: #ffe4e6;
+
+  --color-ink: #0b1220;
+  --color-muted: #55607a;
+  --color-line: #e6e2d9;
+  --color-surface: #ffffff;
+  --color-wash: #faf7f1;
+
+  --color-success: #14915c;
+  --color-warning: #d98a10;
+  --color-danger: #d63b2a;
+
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1rem;
+  --shadow-card: 0 1px 2px rgb(4 12 30 / 0.05), 0 8px 24px -12px rgb(4 12 30 / 0.12);
+  --shadow-pop: 0 2px 6px rgb(4 12 30 / 0.08), 0 16px 40px -16px rgb(4 12 30 / 0.22);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-cream-200);
+  color: var(--color-navy-950);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Skip link (a11y) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-navy-950);
+  color: var(--color-cream-100);
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 0.5rem 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* Leaflet fixes */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-card);
+  z-index: 0;
+}
+
+/* Thin scrollbar for trays */
+.scrollbar-thin::-webkit-scrollbar { height: 6px; width: 6px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: var(--color-navy-200); border-radius: 3px; }
+
+/* Prose defaults for blog rendering */
+.prose-amadhi {
+  max-width: 68ch;
+  line-height: 1.75;
+}
+.prose-amadhi h2 { font-size: 1.5rem; font-weight: 600; margin: 2rem 0 0.75rem; scroll-margin-top: 6rem; }
+.prose-amadhi h3 { font-size: 1.2rem; font-weight: 600; margin: 1.5rem 0 0.5rem; scroll-margin-top: 6rem; }
+.prose-amadhi p { margin: 0.9rem 0; color: #2a3348; }
+.prose-amadhi ul { list-style: disc; padding-left: 1.4rem; margin: 0.9rem 0; color: #2a3348; }
+.prose-amadhi ol { list-style: decimal; padding-left: 1.4rem; margin: 0.9rem 0; color: #2a3348; }
+.prose-amadhi a { color: var(--color-accent-600); text-decoration: underline; text-underline-offset: 3px; }
+.prose-amadhi blockquote { border-left: 3px solid var(--color-cream-300); padding-left: 1rem; font-style: italic; color: var(--color-muted); margin: 1.2rem 0; }
+.prose-amadhi table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.925rem; }
+.prose-amadhi th, .prose-amadhi td { border: 1px solid var(--color-line); padding: 0.6rem 0.8rem; text-align: left; }
+.prose-amadhi th { background: var(--color-wash); font-weight: 600; }
