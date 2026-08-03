@@ -30,15 +30,33 @@ Pages such as `/blog/[category]/[slug]` and `/spaces/[slug]` call
 ## Steps
 
 ### 1. Create a Postgres database
-Vercel Postgres (Storage → Create → Postgres) sets `DATABASE_URL` for you.
-Neon or Supabase work identically — copy their connection string.
+
+**Supabase** (free tier: 500 MB — this dataset is ~7.4 MB):
+supabase.com → New project → pick a region near your users (`ap-south-1`,
+Mumbai, for an NCR audience). Save the database password it shows you; it is
+displayed once.
+
+Then **Project Settings → Database → Connection string**, and copy *both*:
+
+| Supabase tab | Port | Goes in |
+|---|---|---|
+| Transaction pooler | 6543 | `DATABASE_URL` — append `?pgbouncer=true&connection_limit=1` |
+| Direct connection | 5432 | `DIRECT_URL` |
+
+Two URLs are required because serverless functions open a connection per
+instance and would exhaust Postgres without the pooler — but the pooler breaks
+the prepared statements that `prisma db push` needs. `schema.prisma` declares
+both, so Prisma routes each to the right place. Neon works the same way; with
+Vercel Postgres or a plain self-hosted server there is no pooler, so set
+`DIRECT_URL` to the same value as `DATABASE_URL` (Prisma errors if it is unset).
 
 ### 2. Set environment variables
 Project → Settings → Environment Variables (Production **and** Preview):
 
 | Variable | Value |
 |---|---|
-| `DATABASE_URL` | `postgresql://…` (Vercel Postgres sets this automatically) |
+| `DATABASE_URL` | pooled connection string, port 6543 |
+| `DIRECT_URL` | direct connection string, port 5432 |
 | `AUTH_SECRET` | `openssl rand -base64 32` |
 | `NEXT_PUBLIC_SITE_URL` | `https://your-domain.com` |
 | `CLOUDINARY_CLOUD_NAME` | your cloud name |
@@ -51,11 +69,15 @@ Project → Settings → Environment Variables (Production **and** Preview):
 Run locally, pointed at the new database:
 
 ```bash
-export DATABASE_URL="postgresql://…"
+export DATABASE_URL="postgresql://…:6543/postgres?pgbouncer=true&connection_limit=1"
+export DIRECT_URL="postgresql://…:5432/postgres"
 
-npx prisma db push                              # create tables
+npx prisma db push                              # create tables (uses DIRECT_URL)
 node prisma/migrate-sqlite-to-postgres.mjs      # copy the shipped dev.db across
 ```
+
+The migration script prefers `DIRECT_URL` and warns if handed a pooled URL —
+bulk-loading 25k rows through a transaction pooler is slow and unreliable.
 
 That moves ~25,000 rows — 1,468 listings, 8,930 images, 378 operators, 171
 localities, blog, FAQs and admin users. Add `--dry-run` first to preview, or

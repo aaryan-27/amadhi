@@ -33,13 +33,23 @@ const WIPE = args.includes("--wipe");
 const SQLITE_PATH = (args.find((a) => a.startsWith("--sqlite=")) || "").split("=")[1]
   || path.join(HERE, "dev.db");
 
-if (!process.env.DATABASE_URL || !/^postgres/.test(process.env.DATABASE_URL)) {
-  console.error(`
-✖ DATABASE_URL must be a postgres:// connection string.
+// Bulk loading goes over the DIRECT connection: transaction poolers (Supabase
+// Supavisor, PgBouncer) cap concurrent statements and break prepared statements,
+// which makes a 25k-row load slow and flaky. Fall back to DATABASE_URL when no
+// pooler is in play and DIRECT_URL was never set.
+const TARGET_URL = process.env.DIRECT_URL || process.env.DATABASE_URL;
 
-  DATABASE_URL="postgres://user:pass@host/db" node prisma/migrate-sqlite-to-postgres.mjs
+if (!TARGET_URL || !/^postgres/.test(TARGET_URL)) {
+  console.error(`
+✖ Need a postgres:// connection string in DIRECT_URL (preferred) or DATABASE_URL.
+
+  DIRECT_URL="postgres://user:pass@host:5432/db" node prisma/migrate-sqlite-to-postgres.mjs
 `);
   process.exit(1);
+}
+
+if (/6543|pgbouncer=true/.test(TARGET_URL)) {
+  console.warn("⚠  This looks like a POOLED URL. Use the direct connection (port 5432) for bulk loads.\n");
 }
 
 /** Parse the SQLite schema so we know which fields are dates/booleans/ints. */
@@ -75,10 +85,10 @@ const delegate = (m) => m[0].toLowerCase() + m.slice(1);
 const types = fieldTypes();
 const src = new DatabaseSync(SQLITE_PATH, { readOnly: true });
 const { PrismaClient } = await import(path.join(PROJECT, "node_modules/@prisma/client/default.js"));
-const pg = new PrismaClient();
+const pg = new PrismaClient({ datasourceUrl: TARGET_URL });
 
 console.log(`\n📦 source: ${SQLITE_PATH}`);
-console.log(`🎯 target: ${process.env.DATABASE_URL.replace(/:[^:@/]+@/, ":****@")}\n`);
+console.log(`🎯 target: ${TARGET_URL.replace(/:[^:@/]+@/, ":****@")}\n`);
 
 if (WIPE && !DRY) {
   console.log("🧹 clearing destination tables…");

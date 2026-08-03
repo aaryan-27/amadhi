@@ -14,8 +14,14 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  // Runtime queries. Behind a pooler (Supabase Supavisor, PgBouncer) this is the
+  // pooled port 6543 URL with ?pgbouncer=true&connection_limit=1.
+  url       = env("DATABASE_URL")
+  // Schema changes (db push / migrate) must bypass the pooler — port 5432.
+  // Not using a pooler? Set DIRECT_URL to the same value as DATABASE_URL;
+  // Prisma errors if the variable is missing entirely.
+  directUrl = env("DIRECT_URL")
 }
 
 /* ─── Geography ──────────────────────────────────────────────────────── */
