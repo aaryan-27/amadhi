@@ -7,15 +7,27 @@ Next.js 15 (App Router) + Prisma + Tailwind v4, running as a single deployable a
 
 ```bash
 npm install
-npx prisma db push      # creates prisma/dev.db (SQLite for dev)
-npx prisma db seed      # 3 cities, 22 localities, 47 listings, blog, admin users
+cp .env.example .env    # then fill in DATABASE_URL (Postgres) + AUTH_SECRET
+
+npx prisma db push                            # create the schema
+node prisma/migrate-sqlite-to-postgres.mjs    # load the shipped NCR inventory
+
 npm run dev             # http://localhost:3000
 ```
+
+The repo ships `prisma/dev.db` — a SQLite snapshot holding the full live dataset
+(1,468 listings, 8,930 images, 378 operators). The migrate script copies it into
+Postgres. Prefer the small demo dataset instead? Run `npx prisma db seed`.
+
+No Postgres to hand? See [working locally without Postgres](docs/11-vercel-deployment.md#working-locally-without-postgres).
 
 **Admin:** http://localhost:3000/admin — sign in as `admin@amadhi.com` (a sales-role user, `sales@amadhi.com`, is seeded too).
 Set `ADMIN_SEED_PASSWORD` in `.env` **before** seeding to choose their password; if you leave it unset the seed generates a random one and prints it once. No default password is baked into the repo.
 
-Production uses PostgreSQL 16: copy `prisma/schema.postgres.prisma` over `prisma/schema.prisma`, point `DATABASE_URL` at Postgres, apply `prisma/postgres-fts.sql`, set `SEARCH_ENGINE=postgres`. Full instructions: [docs/08-deployment.md](docs/08-deployment.md).
+**Deployment** — the app runs on PostgreSQL in every environment. After the first `prisma db push`, apply `prisma/postgres-fts.sql` and set `SEARCH_ENGINE=postgres` to enable pg_trgm search ranking.
+
+- Single VPS (zero recurring cost): [docs/08-deployment.md](docs/08-deployment.md)
+- Vercel: [docs/11-vercel-deployment.md](docs/11-vercel-deployment.md)
 
 ## Deliverables index
 
@@ -32,6 +44,7 @@ Production uses PostgreSQL 16: copy `prisma/schema.postgres.prisma` over `prisma
 | 16 | Deployment guide (VPS → Nginx → PM2 → Certbot → Cloudflare → GH Actions) | [docs/08-deployment.md](docs/08-deployment.md) |
 | 17 | Testing strategy | [docs/09-testing.md](docs/09-testing.md) |
 | 18 | Future roadmap | [docs/10-roadmap.md](docs/10-roadmap.md) |
+| — | Vercel deployment | [docs/11-vercel-deployment.md](docs/11-vercel-deployment.md) |
 
 ## Hard constraints honoured
 

@@ -1,14 +1,20 @@
-// Amadhi — Prisma schema (development: SQLite)
-// Production uses PostgreSQL 16 — see prisma/schema.postgres.prisma.
-// The two are model-identical; SQLite cannot use native enums or tsvector,
-// so enum-like fields are strings validated by Zod at the app boundary.
+// Amadhi — Prisma schema (PostgreSQL).
+// This is the schema used by the app in every environment (Vercel, VPS, local).
+// DATABASE_URL must be a postgres:// connection string.
+//
+// After the first `prisma db push`, apply prisma/postgres-fts.sql once to add
+// pg_trgm + tsvector search indexes, then set SEARCH_ENGINE=postgres.
+//
+// prisma/schema.sqlite.prisma keeps the model-identical SQLite variant for
+// offline work; prisma/migrate-sqlite-to-postgres.mjs moves data across.
+
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
