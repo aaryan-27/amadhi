@@ -35,7 +35,7 @@ Set `ADMIN_SEED_PASSWORD` in `.env` **before** seeding to choose their password;
 |---|---|---|
 | 1–4 | PRD · Personas · User-flow diagrams · IA & sitemap | [docs/01-prd-personas-flows.md](docs/01-prd-personas-flows.md) |
 | 5–7, 11–12 | Wireframes · Design system · Hi-fi mockups · Component library · Admin/CMS design | [docs/02-design-system.md](docs/02-design-system.md) + the built app (`src/components`, `/admin`) |
-| 8 | Database schema (Prisma) | [prisma/schema.prisma](prisma/schema.prisma) · [prisma/schema.postgres.prisma](prisma/schema.postgres.prisma) · [prisma/postgres-fts.sql](prisma/postgres-fts.sql) |
+| 8 | Database schema (Prisma) | [prisma/schema.prisma](prisma/schema.prisma) · [prisma/schema.sqlite.prisma](prisma/schema.sqlite.prisma) · [prisma/postgres-fts.sql](prisma/postgres-fts.sql) |
 | 9 | API documentation | [docs/04-api.md](docs/04-api.md) |
 | 10 | Architecture (single-VPS topology) | [docs/03-architecture.md](docs/03-architecture.md) |
 | 13 | SEO strategy + technical SEO | [docs/05-seo.md](docs/05-seo.md) |
