@@ -74,13 +74,13 @@ password from step 1.2.
 Then **add this to the end of the pooler one only**:
 
 ```
-?pgbouncer=true&connection_limit=1
+?pgbouncer=true
 ```
 
 You should end up with two lines that look like this:
 
 ```
-DATABASE_URL="postgresql://postgres.abcdefgh:YourPassword@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1"
+DATABASE_URL="postgresql://postgres.abcdefgh:YourPassword@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
 DIRECT_URL="postgresql://postgres.abcdefgh:YourPassword@aws-0-ap-south-1.pooler.supabase.com:5432/postgres"
 ```
 
@@ -115,7 +115,7 @@ cd "/Users/aryan/Downloads/Amadhi Website/amadhi"
 If you are setting this up on a different computer, clone it first:
 
 ```bash
-git clone https://github.com/aaryan-27/amadhi.git && cd amadhi && npm install
+git clone https://github.com/amadhi-gg/amadhi-website.git && cd amadhi-website && npm install
 ```
 
 ### 2.2 Put the connection strings in `.env`
@@ -196,7 +196,7 @@ GitHub**.
 
 ### 3.3 Import the repository
 
-Click **Add New… → Project**. Find `amadhi` in the list and click **Import**.
+Click **Add New… → Project**. Find `amadhi-website` in the list and click **Import**.
 Vercel detects Next.js automatically — **change none of the build settings**.
 
 ### 3.4 Add the environment variables

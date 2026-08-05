@@ -40,8 +40,14 @@ Then **Project Settings → Database → Connection string**, and copy *both*:
 
 | Supabase tab | Port | Goes in |
 |---|---|---|
-| Transaction pooler | 6543 | `DATABASE_URL` — append `?pgbouncer=true&connection_limit=1` |
+| Transaction pooler | 6543 | `DATABASE_URL` — append `?pgbouncer=true` |
 | Direct connection | 5432 | `DIRECT_URL` |
+
+> **Do not add `connection_limit=1`.** It is widely recommended for serverless,
+> but Next.js serves requests concurrently inside one instance, so a pool of one
+> serialises them — measured against Supabase, 1 in 5 requests failed with P2024
+> `Timed out fetching a new connection` at only five concurrent readers. Prisma's
+> default pool size is the safer starting point.
 
 Two URLs are required because serverless functions open a connection per
 instance and would exhaust Postgres without the pooler — but the pooler breaks
@@ -69,7 +75,7 @@ Project → Settings → Environment Variables (Production **and** Preview):
 Run locally, pointed at the new database:
 
 ```bash
-export DATABASE_URL="postgresql://…:6543/postgres?pgbouncer=true&connection_limit=1"
+export DATABASE_URL="postgresql://…:6543/postgres?pgbouncer=true"
 export DIRECT_URL="postgresql://…:5432/postgres"
 
 npx prisma db push                              # create tables (uses DIRECT_URL)
