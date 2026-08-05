@@ -26,8 +26,9 @@ Set `ADMIN_SEED_PASSWORD` in `.env` **before** seeding to choose their password;
 
 **Deployment** — the app runs on PostgreSQL in every environment. After the first `prisma db push`, apply `prisma/postgres-fts.sql` and set `SEARCH_ENGINE=postgres` to enable pg_trgm search ranking.
 
-- Single VPS (zero recurring cost): [docs/08-deployment.md](docs/08-deployment.md)
-- Vercel: [docs/11-vercel-deployment.md](docs/11-vercel-deployment.md)
+- **Free, step-by-step for non-developers** (Supabase + Vercel): [docs/12-free-deployment.md](docs/12-free-deployment.md)
+- Single VPS (no commercial-use limits, never sleeps): [docs/08-deployment.md](docs/08-deployment.md)
+- Vercel reference (what changed and why): [docs/11-vercel-deployment.md](docs/11-vercel-deployment.md)
 
 ## Deliverables index
 
