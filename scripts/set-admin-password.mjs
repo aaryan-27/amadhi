@@ -14,6 +14,8 @@
 import { randomBytes } from "node:crypto";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
+import { readFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import path from "node:path";
 
 const PROJECT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -47,24 +49,65 @@ if (password.length < 10) {
 }
 
 const bcrypt = require_("bcryptjs");
+
+/**
+ * The generated Prisma Client is locked to one provider, and local development
+ * keeps it on SQLite. Pointing that client at Postgres fails validation before
+ * a single query runs, so regenerate to match the URL and put it back afterwards.
+ */
+const wanted = url.startsWith("file:") ? "sqlite" : "postgresql";
+const schemaFor = (p) => (p === "sqlite" ? "prisma/schema.sqlite.prisma" : "prisma/schema.prisma");
+const generatedProvider = () => {
+  try {
+    const s = readFileSync(path.join(PROJECT, "node_modules/.prisma/client/schema.prisma"), "utf8");
+    return (s.match(/provider\s*=\s*"(sqlite|postgresql)"/) || [])[1];
+  } catch { return undefined; }
+};
+
+const original = generatedProvider();
+const switched = original && original !== wanted;
+
+if (switched) {
+  console.log(`↻ regenerating Prisma Client for ${wanted} (was ${original})…`);
+  const r = spawnSync("npx", ["prisma", "generate", `--schema=${schemaFor(wanted)}`],
+    { cwd: PROJECT, encoding: "utf8", env: { ...process.env, DATABASE_URL: url } });
+  if (r.status !== 0) {
+    console.error("✖ Could not regenerate Prisma Client:\n" + ((r.stdout || "") + (r.stderr || "")));
+    process.exit(1);
+  }
+}
+
+const restore = () => {
+  if (!switched) return;
+  console.log(`↻ restoring the ${original} client for local development…`);
+  spawnSync("npx", ["prisma", "generate", `--schema=${schemaFor(original)}`],
+    { cwd: PROJECT, encoding: "utf8", env: { ...process.env, DATABASE_URL: "file:./dev.db" } });
+};
+
 const { PrismaClient } = await import(path.join(PROJECT, "node_modules/@prisma/client/default.js"));
 const db = new PrismaClient({ datasourceUrl: url });
 
+let failed = false;
 try {
   const user = await db.adminUser.findUnique({ where: { email } });
   if (!user) {
     const all = await db.adminUser.findMany({ select: { email: true } });
     console.error(`✖ No admin user "${email}".\n  Existing: ${all.map((u) => u.email).join(", ") || "(none)"}`);
-    process.exit(1);
+    failed = true;
+  } else {
+    await db.adminUser.update({
+      where: { email },
+      data: { passwordHash: bcrypt.hashSync(password, 12) },
+    });
+    console.log(`\n✅ Password updated for ${email}`);
+    if (generated) console.log(`\n   ${password}\n\n   Save it now — it is not stored anywhere and cannot be shown again.`);
   }
-
-  await db.adminUser.update({
-    where: { email },
-    data: { passwordHash: bcrypt.hashSync(password, 12) },
-  });
-
-  console.log(`\n✅ Password updated for ${email}`);
-  if (generated) console.log(`\n   ${password}\n\n   Save it now — it is not stored anywhere and cannot be shown again.`);
+} catch (e) {
+  console.error(`✖ ${e.message.split("\n").filter((l) => l.trim()).slice(-1)[0]}`);
+  failed = true;
 } finally {
+  // Always put the client back, even on failure — otherwise local dev stays broken.
   await db.$disconnect();
+  restore();
 }
+process.exit(failed ? 1 : 0);
