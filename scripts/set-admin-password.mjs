@@ -27,6 +27,19 @@ const arg = (name) => {
   return hit ? hit.slice(name.length + 3) : undefined;
 };
 
+/** Load .env, without a dependency. Real environment variables win. */
+function loadDotEnv() {
+  let raw;
+  try { raw = readFileSync(path.join(PROJECT, ".env"), "utf8"); } catch { return; }
+  for (const line of raw.split("\n")) {
+    const m = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+    if (!m) continue;
+    const value = m[2].trim().replace(/^["'](.*)["']$/, "$1");
+    if (process.env[m[1]] === undefined) process.env[m[1]] = value;
+  }
+}
+loadDotEnv();
+
 const email = arg("email");
 // DIRECT_URL first: schema/data work should bypass a connection pooler.
 const url = process.env.DIRECT_URL || process.env.DATABASE_URL;
