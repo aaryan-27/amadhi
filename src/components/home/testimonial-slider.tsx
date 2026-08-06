@@ -93,15 +93,26 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
               <blockquote className="mt-3 flex-1 text-[14.5px] leading-relaxed text-navy-800">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
-              <figcaption className="mt-4 flex items-center gap-3 border-t border-line pt-4">
+              <figcaption className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-4">
+                <span className="min-w-0">
+                  <span className="block truncate font-display text-sm font-semibold text-navy-950">{t.name}</span>
+                  <span className="block truncate text-xs text-teal-600">
+                    {t.persona}
+                    {t.company ? ` · ${t.company}` : ""}
+                  </span>
+                </span>
                 {t.logo ? (
-                  <Image
-                    src={t.logo}
-                    alt={t.company ?? t.name}
-                    width={44}
-                    height={44}
-                    className="h-11 w-11 shrink-0 rounded-lg object-contain ring-1 ring-black/5"
-                  />
+                  // Wide slot, no ring: client marks are transparent and run
+                  // from 1:1 to 4:1, so a square framed box would letterbox them.
+                  <span className="flex h-9 w-20 shrink-0 items-center justify-end">
+                    <Image
+                      src={t.logo}
+                      alt={t.company ?? t.name}
+                      width={80}
+                      height={36}
+                      className="max-h-full w-auto max-w-full object-contain"
+                    />
+                  </span>
                 ) : (
                   <span
                     aria-hidden
@@ -113,13 +124,6 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
                     {initials(t.name)}
                   </span>
                 )}
-                <span className="min-w-0">
-                  <span className="block truncate font-display text-sm font-semibold text-navy-950">{t.name}</span>
-                  <span className="block truncate text-xs text-teal-600">
-                    {t.persona}
-                    {t.company ? ` · ${t.company}` : ""}
-                  </span>
-                </span>
               </figcaption>
             </figure>
           </li>

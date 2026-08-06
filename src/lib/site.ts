@@ -51,26 +51,34 @@ export const CHANNEL_PARTNERS = [
   { name: "CorporatEdge", logo: null },
 ] as const;
 
+/**
+ * Client logos for the "Businesses leveraging Amadhi" strip. These live under
+ * /clients (not /partners — that folder is workspace operators) and are stored
+ * with a transparent outer plate so they sit directly on the section wash.
+ */
 export const BUSINESS_PARTNERS = [
-  { name: "SAP", logo: null },
-  { name: "RateGain", logo: "/partners/rategain.png" },
-  { name: "Nuvama Wealth", logo: null },
-  { name: "Shyft", logo: "/partners/shyft.png" },
-  { name: "Xoxoday", logo: "/partners/xoxoday.png" },
-  { name: "SiriusAI", logo: "/partners/siriusai.png" },
-  { name: "Contempo", logo: "/partners/contempo.png" },
-  { name: "Jimmy's Cocktails", logo: "/partners/jimmys.png" },
-  { name: "TradeGhar", logo: "/partners/tradeghar.png" },
-  { name: "OakBridge Advisory", logo: null },
-  { name: "Planted Expo", logo: "/partners/planted.png" },
-  { name: "Spare", logo: null },
+  { name: "SAP", logo: "/clients/sap.png" },
+  { name: "RateGain", logo: "/clients/rategain.png" },
+  { name: "Nuvama Wealth", logo: "/clients/nuvama.png" },
+  { name: "Shyft", logo: "/clients/shyft.png" },
+  { name: "Xoxoday", logo: "/clients/xoxoday.png" },
+  { name: "SiriusAI", logo: "/clients/siriusai.png" },
+  { name: "Contempo", logo: "/clients/contempo.png" },
+  { name: "Jimmy's Cocktails", logo: "/clients/jimmys.png" },
+  { name: "TradeGhar", logo: "/clients/tradeghar.png" },
+  { name: "OakBridge Advisory", logo: "/clients/oakbridge.png" },
+  { name: "Plantd", logo: "/clients/plantd.png" },
+  { name: "Spare", logo: "/clients/spare.png" },
+  { name: "Loomiz", logo: "/clients/loomiz.png" },
+  { name: "Dove Soft", logo: "/clients/dovesoft.png" },
 ] as const;
 
 /**
  * Real client testimonials from amadhi.com.
- * `company`/`logo` are only set where amadhi.com actually attributes one —
- * today that is DreamITCS alone. The rest render an initials monogram rather
- * than an invented company mark.
+ * `company`/`logo` are only set where we hold an attribution. Logos point at
+ * /clients/tight — the mark cropped free of its canvas padding, so it still
+ * reads at avatar size. Reviewers without one render an initials monogram
+ * rather than an invented company mark.
  */
 export interface Testimonial {
   quote: string;
@@ -86,18 +94,24 @@ export const TESTIMONIALS: Testimonial[] = [
       "Amadhi's support in finding a coworking space that met our needs was invaluable. They were responsive, provided honest advice, and patiently listened to all details, offering prompt and helpful information. Their proactive approach and quick responses make them a great organisation to work with.",
     name: "Amrita Saini",
     persona: "HR Manager",
+    company: "Shyft",
+    logo: "/clients/tight/shyft.png",
   },
   {
     quote:
       "Our office in Gurgaon embodies a lively and energetic atmosphere, fostering productivity and teamwork with excellent facilities. Amadhi and the team were instrumental in helping us find the perfect space that met all our needs, making the transition smooth and easy.",
     name: "Mukhtesh Narula",
     persona: "Founder",
+    company: "Dove Soft",
+    logo: "/clients/tight/dovesoft.png",
   },
   {
     quote:
       "As a company venturing into India, we were clueless about the co-working office market in Gurgaon. Their expertise, from exploring options to finalising the lease, was invaluable. We highly recommend their services for anyone seeking office space.",
     name: "Saurabh Shah",
     persona: "Director",
+    company: "Spare",
+    logo: "/clients/tight/spare.png",
   },
   {
     quote:
@@ -112,6 +126,8 @@ export const TESTIMONIALS: Testimonial[] = [
       "Amadhi and the team provided excellent service, responding promptly with several options to choose from. Their quick response and range of choices made the experience efficient and accommodating, showcasing their commitment to hassle-free, quality service.",
     name: "Anshul",
     persona: "Chief Product Officer",
+    company: "Plantd",
+    logo: "/clients/tight/plantd.png",
   },
 ];
 

@@ -63,24 +63,14 @@ export function ListingCard({ listing, priority = false }: { listing: ListingCar
           {listing.trending && <Badge tone="trending" className="bg-white/95">Trending</Badge>}
         </div>
 
-        {/* Operator brand mark: the trimmed logo where we hold one (it carries
-            its own background so light marks stay legible), otherwise a name
-            chip so every card gets consistent attribution. */}
+        {/* Operator attribution as a name chip. The trimmed marks range from
+            1:1 to 9:1, so any single logo box letterboxed most of them. */}
         {listing.operator && (
-          <span className="absolute bottom-3 left-3 max-w-[70%]" title={listing.operator.name}>
-            {listing.operator.logoUrl ? (
-              <Image
-                src={listing.operator.logoUrl.replace("/partners/", "/partners/mark-")}
-                alt={listing.operator.name}
-                width={140}
-                height={28}
-                className="h-7 w-auto rounded-md object-contain shadow-sm ring-1 ring-black/10"
-              />
-            ) : (
-              <span className="block truncate rounded-lg bg-white/95 px-2.5 py-1.5 text-[11px] font-semibold tracking-wide text-navy-900 shadow-sm ring-1 ring-black/5 backdrop-blur-sm">
-                {listing.operator.name}
-              </span>
-            )}
+          <span
+            title={listing.operator.name}
+            className="absolute bottom-3 left-3 block max-w-[70%] truncate rounded-lg bg-white/95 px-2.5 py-1.5 text-[11px] font-semibold tracking-wide text-navy-900 shadow-sm ring-1 ring-black/5 backdrop-blur-sm"
+          >
+            {listing.operator.name}
           </span>
         )}
       </Link>

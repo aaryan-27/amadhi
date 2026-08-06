@@ -71,11 +71,11 @@ export function Header() {
       <nav ref={navRef} aria-label="Main" className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="Amadhi home">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-navy-950 p-1.5">
-            <Image src="/brand/icon.png" alt="" width={28} height={28} className="h-full w-full object-contain" />
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-950 p-1">
+            <Image src="/brand/icon.png" alt="" width={32} height={32} className="h-full w-full object-contain" />
           </span>
-          <span className="hidden flex-col leading-none sm:flex">
-            <span className="font-display text-lg font-bold tracking-wide text-navy-950">AMADHI</span>
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-base font-bold tracking-wide text-navy-950 sm:text-lg">AMADHI</span>
             <span className="text-[10px] font-medium tracking-wide text-muted">Your space to grow</span>
           </span>
         </Link>

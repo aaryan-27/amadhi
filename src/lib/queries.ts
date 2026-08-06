@@ -239,17 +239,33 @@ export const getOperators = cache(() =>
  * ranked by live listing count. Replaces the old hardcoded brochure list, so
  * the homepage can never advertise a partner we don't list.
  */
+/**
+ * Editorial overrides on the partner wall. Pinned brands are guaranteed a slot
+ * even though their inventory sits below the natural cut; held brands give up
+ * theirs. Both still pass through the `listings > 0` filter, so neither can put
+ * a brand on the wall that we don't actually carry.
+ */
+const PINNED_PARTNERS = ["ofis-square", "cowrks", "the-circlework"];
+const HELD_PARTNERS = ["synqwork", "simpliwork", "supremework"];
+
 export const getChannelPartners = cache(async (limit = 12) => {
   const rows = await db.operator.findMany({
     include: { _count: { select: { listings: { where: { status: "published" } } } } },
   });
-  return rows
-    .filter((o) => o._count.listings > 0)
-    .sort((a, b) => {
-      // brands whose logo we hold lead the wall, then by inventory depth
-      const logoDiff = Number(Boolean(b.logoUrl)) - Number(Boolean(a.logoUrl));
-      return logoDiff !== 0 ? logoDiff : b._count.listings - a._count.listings;
-    })
+
+  const live = rows.filter(
+    (o) => o._count.listings > 0 && !HELD_PARTNERS.includes(o.slug),
+  );
+  // brands whose logo we hold lead the wall, then by inventory depth
+  const byRank = (a: (typeof live)[number], b: (typeof live)[number]) => {
+    const logoDiff = Number(Boolean(b.logoUrl)) - Number(Boolean(a.logoUrl));
+    return logoDiff !== 0 ? logoDiff : b._count.listings - a._count.listings;
+  };
+
+  const pinned = live.filter((o) => PINNED_PARTNERS.includes(o.slug)).sort(byRank);
+  const rest = live.filter((o) => !PINNED_PARTNERS.includes(o.slug)).sort(byRank);
+
+  return [...rest.slice(0, Math.max(0, limit - pinned.length)), ...pinned]
     .slice(0, limit)
     .map((o) => ({
       slug: o.slug,
