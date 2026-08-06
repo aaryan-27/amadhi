@@ -17,6 +17,7 @@ import { JsonLd, faqLd } from "@/components/seo/jsonld";
 import { EnquiryForm } from "@/components/forms/lead-forms";
 import { TestimonialSlider } from "@/components/home/testimonial-slider";
 import { HeroSearch } from "@/components/home/hero-search";
+import { LogoMarquee } from "@/components/home/logo-marquee";
 import { CITY_PHOTOS } from "@/data/photos";
 import { cn } from "@/lib/utils";
 
@@ -281,18 +282,20 @@ export default async function HomePage() {
               <li key={p.slug}>
                 <Link
                   href={`/search?operator=${p.slug}`}
-                  className="group flex h-28 flex-col items-center justify-center gap-1.5 overflow-hidden rounded-2xl border border-line bg-white p-3 shadow-card transition-all hover:-translate-y-0.5 hover:border-teal-500 hover:shadow-pop"
+                  className="group flex h-28 flex-col items-center justify-center gap-1.5 overflow-hidden rounded-2xl bg-white p-3 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-pop"
                 >
+                  {/* Fixed 96×48 box for every mark — object-contain fits the
+                      plate inside it, so no logo can render larger than another. */}
                   {p.logo ? (
                     <Image
                       src={p.logo}
                       alt={p.name}
                       width={160}
                       height={80}
-                      className="max-h-12 w-auto rounded-lg object-contain"
+                      className="h-12 w-24 rounded-lg object-contain"
                     />
                   ) : (
-                    <span className="text-center font-display text-sm font-semibold leading-tight tracking-wide text-navy-700 group-hover:text-teal-700">
+                    <span className="flex h-12 w-24 items-center justify-center text-center font-display text-sm font-semibold leading-tight tracking-wide text-navy-700 group-hover:text-teal-700">
                       {p.name}
                     </span>
                   )}
@@ -335,45 +338,43 @@ export default async function HomePage() {
             <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest text-muted">
               Businesses leveraging Amadhi
             </p>
-            <ul className="flex flex-wrap items-center justify-center gap-3">
-              {BUSINESS_PARTNERS.filter((p) => p.logo).map((p) => (
-                <li
-                  key={p.name}
-                  className="flex h-14 w-32 items-center justify-center overflow-hidden rounded-xl border border-line bg-white p-2 shadow-card"
-                >
-                  <Image src={p.logo!} alt={p.name} width={110} height={44} className="max-h-full w-auto rounded object-contain" />
-                </li>
-              ))}
-              <li className="flex h-14 items-center rounded-xl border border-dashed border-navy-200 px-4 text-xs font-medium text-muted">
-                …plus SAP, Nuvama Wealth &amp; more
-              </li>
-            </ul>
+            <LogoMarquee
+              items={BUSINESS_PARTNERS.filter((p) => p.logo).map((p) => ({
+                name: p.name,
+                logo: p.logo!,
+              }))}
+            />
+            <p className="mt-4 text-center text-xs font-medium text-muted">
+              …and many more across Delhi NCR
+            </p>
           </div>
         </Section>
       </div>
 
       {/* ─── Enterprise band ──────────────────────────────────────── */}
       <Section className="py-16 sm:py-20">
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-navy-950 via-navy-900 to-teal-700">
+        <div className="overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-cream-50 via-white to-teal-50 shadow-card">
+          {/* Thin brand hairline — keeps the accent without the heavy fill */}
+          <div className="h-1 bg-gradient-to-r from-accent-500 via-gold-400 to-teal-500" />
           <div className="grid items-center gap-8 p-8 sm:p-12 lg:grid-cols-2">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-gold-400">Enterprise solutions</p>
-              <h2 className="mt-2 font-display text-2xl font-semibold text-cream-100 sm:text-3xl">
+              <p className="text-sm font-semibold uppercase tracking-widest text-teal-600">Enterprise solutions</p>
+              <h2 className="mt-2 font-display text-2xl font-semibold text-navy-950 sm:text-3xl">
                 50 to 2,000 seats. One accountable partner.
               </h2>
-              <p className="mt-3 max-w-lg text-navy-200">
+              <p className="mt-3 max-w-lg text-muted">
                 Managed offices, built-to-suit campuses and long-term leases across NCR. Our
                 enterprise desk handles landlord negotiation, fit-out and facilities SLAs —
                 with transparent economics.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <ButtonLink href="/office-leasing" variant="cream">Explore office leasing</ButtonLink>
-                <ButtonLink href={SITE.phoneHref} variant="outline" className="border-navy-500 text-cream-100 hover:bg-navy-800 hover:border-navy-400">
+                <ButtonLink href="/office-leasing">Explore office leasing</ButtonLink>
+                <ButtonLink href={SITE.phoneHref} variant="outline">
                   Talk to the enterprise desk
                 </ButtonLink>
               </div>
             </div>
-            <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl lg:block">
+            <div className="relative hidden aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-line lg:block">
               <Image
                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop"
                 alt="Modern enterprise office space with large workstation floors"
