@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Plus } from "lucide-react";
 import { db } from "@/lib/db";
 import { ListingRow } from "./listing-row";
 
@@ -29,6 +30,12 @@ export default async function AdminListingsPage({
           <h1 className="font-display text-2xl font-bold text-cream-100">Listings</h1>
           <p className="mt-1 text-sm text-navy-300">{listings.length} listings shown</p>
         </div>
+        <Link
+          href="/admin/listings/new"
+          className="flex h-10 items-center gap-2 rounded-xl bg-accent-500 px-4 text-sm font-semibold text-white hover:bg-accent-600"
+        >
+          <Plus className="h-4 w-4" aria-hidden /> Add listing
+        </Link>
         <form className="flex gap-2" action="/admin/listings">
           <input
             type="search"

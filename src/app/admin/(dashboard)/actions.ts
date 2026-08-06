@@ -94,6 +94,208 @@ export async function updateListingCore(
   revalidatePath(`/admin/listings/${listingId}`);
 }
 
+/** Everything the listing form can submit. Relations are replaced wholesale. */
+export type ListingInput = {
+  id?: string;
+  name: string;
+  slug: string;
+  summary: string;
+  description: string;
+  cityId: string;
+  localityId: string;
+  /** Typed instead of picked — created inside the selected city. */
+  newLocalityName?: string;
+  operatorId: string;
+  newOperatorName?: string;
+  address: string;
+  lat: number;
+  lng: number;
+  capacity: number;
+  openingTime: string;
+  closingTime: string;
+  openDays: string;
+  status: string;
+  verified: boolean;
+  featured: boolean;
+  trending: boolean;
+  virtualTourUrl: string;
+  brochureUrl: string;
+  nearby: { name: string; distanceKm: number; type: string }[];
+  amenityIds: string[];
+  images: { url: string; alt: string }[];
+  plans: {
+    productType: string;
+    name: string;
+    seatsMin: number;
+    seatsMax: number;
+    highlights: string;
+    prices: { amount: number; period: string; unitNote: string }[];
+  }[];
+};
+
+const PRODUCT_TYPES = [
+  "coworking", "managed_office", "private_cabin", "dedicated_desk",
+  "meeting_room", "office_leasing", "virtual_office",
+];
+const PERIODS = ["month", "hour", "day", "sqft_month", "year"];
+/** Matches the floor applied across the imported inventory and the public copy. */
+const PRICE_FLOOR_MONTH = 5999;
+
+/** Append -2, -3 … until the slug is free. Ignores the row being edited. */
+async function uniqueListingSlug(base: string, ignoreId?: string) {
+  const root = slugify(base).slice(0, 90) || "listing";
+  for (let n = 1; n < 200; n++) {
+    const candidate = n === 1 ? root : `${root}-${n}`;
+    const clash = await db.listing.findUnique({ where: { slug: candidate }, select: { id: true } });
+    if (!clash || clash.id === ignoreId) return candidate;
+  }
+  return `${root}-${Date.now()}`;
+}
+
+/**
+ * Create or update a listing and all of its relations.
+ *
+ * Images, amenities, plans and prices are replaced rather than diffed: the form
+ * always submits the complete set, so a delete-then-insert inside one
+ * transaction is both simpler and impossible to leave half-applied.
+ */
+export async function saveListing(input: ListingInput) {
+  const { userId } = await requireRole("listings");
+
+  const name = input.name.trim();
+  if (!name) throw new Error("Name is required");
+  if (!input.cityId) throw new Error("City is required");
+  if (!input.localityId && !input.newLocalityName?.trim()) throw new Error("Locality is required");
+  if (!["draft", "published", "archived"].includes(input.status)) throw new Error("Invalid status");
+
+  const city = await db.city.findUnique({ where: { id: input.cityId } });
+  if (!city) throw new Error("Unknown city");
+
+  const lat = Number.isFinite(input.lat) ? input.lat : city.lat;
+  const lng = Number.isFinite(input.lng) ? input.lng : city.lng;
+
+  // A new space is often the first one in its locality, so allow creating one
+  // inline rather than forcing a separate trip to the database.
+  let localityId = input.localityId;
+  if (input.newLocalityName?.trim()) {
+    const localityName = input.newLocalityName.trim();
+    const slug = slugify(localityName);
+    const existing = await db.locality.findUnique({
+      where: { cityId_slug: { cityId: city.id, slug } },
+    });
+    localityId =
+      existing?.id ??
+      (await db.locality.create({
+        data: { slug, name: localityName, cityId: city.id, lat, lng },
+      })).id;
+  }
+  const locality = await db.locality.findUnique({ where: { id: localityId } });
+  if (!locality || locality.cityId !== city.id) throw new Error("Locality does not belong to that city");
+
+  let operatorId: string | null = input.operatorId || null;
+  if (input.newOperatorName?.trim()) {
+    const operatorName = input.newOperatorName.trim();
+    const slug = slugify(operatorName);
+    const existing = await db.operator.findUnique({ where: { slug } });
+    operatorId =
+      existing?.id ??
+      (await db.operator.create({ data: { slug, name: operatorName } })).id;
+  }
+
+  const slug = await uniqueListingSlug(input.slug?.trim() || name, input.id);
+
+  const core = {
+    name: name.slice(0, 120),
+    slug,
+    summary: input.summary.slice(0, 400),
+    description: input.description.slice(0, 8000),
+    cityId: city.id,
+    localityId,
+    operatorId,
+    address: input.address.slice(0, 300),
+    lat,
+    lng,
+    capacity: Math.max(0, Math.min(10000, Math.round(input.capacity) || 0)),
+    openingTime: input.openingTime || "09:00",
+    closingTime: input.closingTime || "20:00",
+    openDays: input.openDays || "Mon–Sat",
+    status: input.status,
+    verified: input.verified,
+    featured: input.featured,
+    trending: input.trending,
+    virtualTourUrl: input.virtualTourUrl.slice(0, 500),
+    brochureUrl: input.brochureUrl.slice(0, 500),
+    nearbyJson: JSON.stringify(
+      input.nearby
+        .filter((n) => n.name.trim())
+        .map((n) => ({ name: n.name.trim(), distanceKm: Number(n.distanceKm) || 0, type: n.type || "landmark" }))
+    ),
+  };
+
+  const images = input.images
+    .filter((i) => i.url.trim())
+    .map((i, index) => ({ url: i.url.trim(), alt: i.alt.trim().slice(0, 200), sortOrder: index }));
+
+  const plans = input.plans
+    .filter((p) => PRODUCT_TYPES.includes(p.productType))
+    .map((p) => ({
+      productType: p.productType,
+      name: p.name.trim().slice(0, 120) || p.productType,
+      seatsMin: Math.max(1, Math.round(p.seatsMin) || 1),
+      seatsMax: Math.max(Math.max(1, Math.round(p.seatsMin) || 1), Math.round(p.seatsMax) || 1),
+      highlights: p.highlights.slice(0, 2000),
+      prices: p.prices
+        .filter((pr) => Number(pr.amount) > 0 && PERIODS.includes(pr.period))
+        .map((pr) => ({
+          // Keeps a hand-entered listing consistent with the ₹5,999 floor the
+          // rest of the catalogue and the marketing copy promise.
+          amount: pr.period === "month" ? Math.max(PRICE_FLOOR_MONTH, Math.round(pr.amount)) : Math.round(pr.amount),
+          period: pr.period,
+          unitNote: pr.unitNote.slice(0, 60),
+        })),
+    }));
+
+  const amenityIds = [...new Set(input.amenityIds)].filter(Boolean);
+
+  const listingId = await db.$transaction(async (tx) => {
+    let id = input.id;
+
+    if (id) {
+      await tx.listing.update({ where: { id }, data: core });
+      // Cascades cover images/amenities; plans are cleared explicitly so their
+      // prices go with them.
+      await tx.listingImage.deleteMany({ where: { listingId: id } });
+      await tx.listingAmenity.deleteMany({ where: { listingId: id } });
+      await tx.plan.deleteMany({ where: { listingId: id } });
+    } else {
+      id = (await tx.listing.create({ data: core })).id;
+    }
+
+    if (images.length) await tx.listingImage.createMany({ data: images.map((i) => ({ ...i, listingId: id! })) });
+    if (amenityIds.length) {
+      await tx.listingAmenity.createMany({ data: amenityIds.map((amenityId) => ({ listingId: id!, amenityId })) });
+    }
+    for (const plan of plans) {
+      const { prices, ...planCore } = plan;
+      const created = await tx.plan.create({ data: { ...planCore, listingId: id! } });
+      if (prices.length) await tx.plan.update({
+        where: { id: created.id },
+        data: { prices: { create: prices } },
+      });
+    }
+    return id!;
+  });
+
+  await log(userId, input.id ? "listing:update" : "listing:create", "listing", listingId);
+
+  revalidatePath("/admin/listings");
+  revalidatePath(`/admin/listings/${listingId}`);
+  revalidatePath(`/spaces/${slug}`);
+  revalidatePath("/", "layout");
+
+  return { id: listingId, slug };
+}
+
 /* ─── Reviews moderation ────────────────────────────────────────────── */
 
 export async function moderateReview(reviewId: string, status: "approved" | "rejected") {
