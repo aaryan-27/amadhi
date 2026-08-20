@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import { SITE } from "@/lib/site";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import "./globals.css";
 
 const inter = Inter({
@@ -41,6 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en-IN" className={`${inter.variable} ${poppins.variable}`}>
       <body>
+        <GoogleAnalytics />
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
