@@ -70,14 +70,16 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-md">
       <nav ref={navRef} aria-label="Main" className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="Amadhi home">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-950 p-1">
-            <Image src="/brand/icon.png" alt="" width={32} height={32} className="h-full w-full object-contain" />
-          </span>
-          <span className="flex flex-col leading-none">
-            <span className="font-display text-base font-bold tracking-wide text-navy-950 sm:text-lg">AMADHI</span>
-            <span className="text-[10px] font-medium tracking-wide text-muted">Your space to grow</span>
-          </span>
+        {/* The lockup already carries the wordmark and tagline, so no text beside it. */}
+        <Link href="/" className="flex shrink-0 items-center" aria-label="Amadhi home">
+          <Image
+            src="/brand/logo.png"
+            alt="Amadhi — Your space to grow"
+            width={121}
+            height={40}
+            priority
+            className="h-9 w-auto sm:h-10"
+          />
         </Link>
 
         {/* Desktop nav */}

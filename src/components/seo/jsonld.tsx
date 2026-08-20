@@ -21,7 +21,7 @@ export const organizationLd = () => ({
   "@type": "Organization",
   name: SITE.name,
   url: SITE.domain,
-  logo: `${SITE.domain}/brand/icon.png`,
+  logo: `${SITE.domain}/brand/logo.png`,
   slogan: SITE.tagline,
   email: SITE.email,
   telephone: SITE.phone,
@@ -129,7 +129,7 @@ export const articleLd = (opts: {
   publisher: {
     "@type": "Organization",
     name: SITE.name,
-    logo: { "@type": "ImageObject", url: `${SITE.domain}/brand/icon.png` },
+    logo: { "@type": "ImageObject", url: `${SITE.domain}/brand/logo.png` },
   },
 });
 

@@ -25,13 +25,14 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3">
-              <Image src="/brand/icon.png" alt="Amadhi" width={40} height={40} className="h-10 w-10 rounded-xl" />
-              <div>
-                <p className="font-display text-xl font-bold tracking-wide text-cream-100">AMADHI</p>
-                <p className="text-xs text-navy-300">Your space to grow</p>
-              </div>
-            </div>
+            {/* Reversed lockup — the navy artwork would vanish on bg-navy-950. */}
+            <Image
+              src="/brand/logo-light.png"
+              alt="Amadhi — Your space to grow"
+              width={158}
+              height={52}
+              className="h-13 w-auto"
+            />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-navy-300">
               Delhi NCR&apos;s premium workspace marketplace. Verified coworking spaces, managed
               offices and enterprise leasing across Gurugram, Noida and Delhi — with zero brokerage.

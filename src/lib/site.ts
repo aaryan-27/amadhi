@@ -7,7 +7,7 @@ export const SITE = {
   name: "Amadhi",
   tagline: "Your space to grow",
   heroStat: "100K+ Spaces. One Platform. Zero Brokerage.",
-  subline: "Your gateway to smarter, flexible and professional work environments",
+  subline: "Amadhi, your gateway to smarter, flexible and professional work environments",
   domain: "https://www.amadhi.com",
   description:
     "Amadhi is Delhi NCR's premium coworking and managed office marketplace. 100K+ spaces, one platform, zero brokerage — verified workspaces in Gurugram, Noida and Delhi.",

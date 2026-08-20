@@ -13,7 +13,7 @@ export default function AdminLoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-navy-950 px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center gap-3">
-          <Image src="/brand/icon.png" alt="Amadhi" width={56} height={56} className="h-14 w-14 rounded-2xl" />
+          <Image src="/brand/mark-light.png" alt="Amadhi" width={56} height={50} className="h-12 w-auto" />
           <div className="text-center">
             <p className="font-display text-xl font-bold tracking-wide text-cream-100">AMADHI ADMIN</p>
             <p className="text-sm text-navy-300">Sign in to your dashboard</p>

@@ -27,7 +27,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 z-30 flex w-60 flex-col border-r border-navy-800 bg-navy-900">
         <div className="flex items-center gap-2.5 border-b border-navy-800 px-5 py-4">
-          <Image src="/brand/icon.png" alt="" width={32} height={32} className="h-8 w-8 rounded-lg" />
+          <Image src="/brand/mark-light.png" alt="" width={32} height={29} className="h-7 w-auto" />
           <div className="leading-tight">
             <p className="font-display text-sm font-bold tracking-wide text-cream-100">AMADHI</p>
             <p className="text-[10px] uppercase tracking-wider text-navy-400">Admin</p>
