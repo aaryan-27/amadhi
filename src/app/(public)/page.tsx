@@ -312,9 +312,9 @@ export default async function HomePage() {
       {/* ─── Featured spaces ──────────────────────────────────────── */}
       <Section className="py-16 sm:py-20">
         <SectionHeading
-          eyebrow="Handpicked"
-          title="Featured spaces this week"
-          sub="High-demand spaces with verified pricing and quick move-in."
+          eyebrow="Featured today"
+          title="Today's featured spaces"
+          sub="A fresh pick from across Gurugram, Noida and Delhi — refreshed every day."
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {featured.slice(0, 8).map((l) => (

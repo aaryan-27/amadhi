@@ -3,6 +3,7 @@
  * templates stay thin and caching stays consistent (ISR 60s on pages).
  */
 import { db } from "@/lib/db";
+import { pickDaily, todayInIndia } from "@/lib/daily-pick";
 import { cache } from "react";
 import type { Prisma } from "@prisma/client";
 
@@ -183,13 +184,43 @@ export async function medianPrice(productType: string, citySlug?: string, locali
   return prices[Math.floor(prices.length / 2)].amount;
 }
 
+const FEATURED_COUNT = 8;
+
+/**
+ * Homepage "featured" spaces — a fresh set every day.
+ *
+ * Draws from every published listing that has a photo and a price, spread
+ * across the three cities, and changes at midnight India time (see
+ * daily-pick.ts). The page revalidates every 60s, so the new set is live
+ * within a minute of the date changing.
+ *
+ * The per-listing `featured` flag no longer decides this section; it still
+ * lifts a listing up the default sort on search and city pages.
+ */
 export const getFeaturedListings = cache(async () => {
-  const rows = await db.listing.findMany({
-    where: { status: "published", featured: true },
-    include: cardInclude,
-    take: 8,
+  // Draw from ids only — loading full card data for ~1,400 rows to show 8
+  // would be wasteful.
+  const pool = await db.listing.findMany({
+    where: {
+      status: "published",
+      images: { some: {} },
+      plans: { some: { prices: { some: {} } } },
+    },
+    select: { id: true, cityId: true },
   });
-  return rows.map((r) => toCard(r));
+
+  const ids = pickDaily(pool, {
+    count: FEATURED_COUNT,
+    day: todayInIndia(),
+    groupOf: (l) => l.cityId,
+  }).map((l) => l.id);
+
+  const rows = await db.listing.findMany({ where: { id: { in: ids } }, include: cardInclude });
+  // `in` doesn't preserve order; keep the interleaved city order from the draw.
+  const position = new Map(ids.map((id, i) => [id, i]));
+  return rows
+    .sort((a, b) => position.get(a.id)! - position.get(b.id)!)
+    .map((r) => toCard(r));
 });
 
 export const getListingDetail = cache((slug: string) =>
