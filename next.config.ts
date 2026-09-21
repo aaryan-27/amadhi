@@ -19,6 +19,15 @@ const securityHeaders = [
 // third-party URL can never silently render again.
 const CLOUDINARY_CLOUD = process.env.CLOUDINARY_CLOUD_NAME ?? "o2gthvvd";
 
+// URLs left behind by the site that ran on amadhi.com before this one. Search
+// engines still list some of them; a permanent redirect sends those visitors
+// somewhere useful and lets the old page's ranking pass to the new one.
+// 301 rather than Next's default 308 for `permanent: true` — both are
+// permanent, but 301 is the one every crawler and SEO tool reads the same way.
+const LEGACY_REDIRECTS: { source: string; destination: string }[] = [
+  { source: "/home-3", destination: "/" },
+];
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -31,6 +40,12 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
+  },
+  async redirects() {
+    // A trailing-slash form (/home-3/, how WordPress wrote its URLs) needs no
+    // entry: Next strips the slash with its own permanent 308 before these
+    // rules run, so it reaches the same 301 in two hops.
+    return LEGACY_REDIRECTS.map((r) => ({ ...r, statusCode: 301 as const }));
   },
 };
 
