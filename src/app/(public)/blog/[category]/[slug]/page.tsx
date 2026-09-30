@@ -4,10 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { db } from "@/lib/db";
 import { getBlogPost, getBlogPosts } from "@/lib/queries";
-import { renderMarkdown } from "@/lib/markdown";
+import { renderMarkdown, extractFaqs } from "@/lib/markdown";
 import { PRODUCTS, CITIES } from "@/lib/site";
 import { Section, Breadcrumbs, Badge } from "@/components/ui/primitives";
-import { JsonLd, breadcrumbLd, articleLd } from "@/components/seo/jsonld";
+import { JsonLd, breadcrumbLd, articleLd, faqLd } from "@/components/seo/jsonld";
 
 export const revalidate = 300;
 
@@ -46,6 +46,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   if (!post || post.status !== "published" || post.category.slug !== category) notFound();
 
   const { html, toc } = renderMarkdown(post.body);
+  // Only emitted when the post actually shows an FAQ section on the page.
+  const faqs = extractFaqs(post.body);
   const allPosts = await getBlogPosts();
   const related = allPosts
     .filter((p) => p.id !== post.id && (p.categoryId === post.categoryId ||
@@ -85,6 +87,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             dateModified: post.updatedAt.toISOString(),
             authorName: post.author.name,
           }),
+          ...(faqs.length ? [faqLd(faqs)] : []),
         ]}
       />
       <Section className="py-10">
