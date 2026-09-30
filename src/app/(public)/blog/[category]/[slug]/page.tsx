@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { db } from "@/lib/db";
-import { getBlogPost, getBlogPosts } from "@/lib/queries";
+import { getBlogPost, getBlogPosts, livePostWhere, isPostLive } from "@/lib/queries";
 import { renderMarkdown, extractFaqs } from "@/lib/markdown";
 import { PRODUCTS, CITIES } from "@/lib/site";
 import { Section, Breadcrumbs, Badge } from "@/components/ui/primitives";
@@ -14,8 +14,10 @@ export const revalidate = 300;
 type Params = Promise<{ category: string; slug: string }>;
 
 export async function generateStaticParams() {
+  // Scheduled posts whose date has not arrived are simply rendered on demand
+  // when it does; they do not need to exist at build time.
   const posts = await db.blogPost.findMany({
-    where: { status: "published" },
+    where: livePostWhere(),
     select: { slug: true, category: { select: { slug: true } } },
   });
   return posts.map((p) => ({ category: p.category.slug, slug: p.slug }));
@@ -24,7 +26,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPost(slug);
-  if (!post || post.status !== "published") return {};
+  if (!post || !isPostLive(post)) return {};
   return {
     title: post.seoTitle || post.title,
     description: post.seoDesc || post.excerpt,
@@ -43,7 +45,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 export default async function BlogPostPage({ params }: { params: Params }) {
   const { category, slug } = await params;
   const post = await getBlogPost(slug);
-  if (!post || post.status !== "published" || post.category.slug !== category) notFound();
+  if (!post || !isPostLive(post) || post.category.slug !== category) notFound();
 
   const { html, toc } = renderMarkdown(post.body);
   // Only emitted when the post actually shows an FAQ section on the page.

@@ -353,10 +353,30 @@ export const getOperatorCount = cache(async () => {
 
 /* ─── Blog ──────────────────────────────────────────────────────────── */
 
+/**
+ * A post is live once its publish date has arrived.
+ *
+ * This is what makes scheduled publishing work without a cron job: give a
+ * draft a future `publishedAt` and status "scheduled", and it simply starts
+ * matching this filter at the right moment. Nothing has to run, so nothing can
+ * fail overnight — and it behaves the same on Vercel and on the VPS.
+ *
+ * Pages revalidate every 300s, so a post appears within about five minutes of
+ * its slot rather than exactly on the second.
+ */
+export const livePostWhere = (): Prisma.BlogPostWhereInput => ({
+  status: { in: ["published", "scheduled"] },
+  publishedAt: { not: null, lte: new Date() },
+});
+
+/** Same rule, for a post already loaded. */
+export const isPostLive = (p: { status: string; publishedAt: Date | null }) =>
+  ["published", "scheduled"].includes(p.status) && !!p.publishedAt && p.publishedAt <= new Date();
+
 export const getBlogPosts = cache((categorySlug?: string) =>
   db.blogPost.findMany({
     where: {
-      status: "published",
+      ...livePostWhere(),
       ...(categorySlug ? { category: { slug: categorySlug } } : {}),
     },
     include: { category: true, author: true, tags: { include: { tag: true } } },
@@ -373,7 +393,7 @@ export const getBlogPost = cache((slug: string) =>
 
 export const getBlogCategories = cache(() =>
   db.blogCategory.findMany({
-    include: { _count: { select: { posts: { where: { status: "published" } } } } },
+    include: { _count: { select: { posts: { where: livePostWhere() } } } },
   })
 );
 
@@ -382,7 +402,7 @@ export const getAuthor = cache((slug: string) =>
     where: { slug },
     include: {
       posts: {
-        where: { status: "published" },
+        where: livePostWhere(),
         include: { category: true, author: true, tags: { include: { tag: true } } },
         orderBy: { publishedAt: "desc" },
       },

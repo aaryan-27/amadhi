@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { db } from "@/lib/db";
 import { PRODUCTS, CITIES, SITE } from "@/lib/site";
-import { LOCALITY_INDEX_THRESHOLD } from "@/lib/queries";
+import { LOCALITY_INDEX_THRESHOLD, livePostWhere } from "@/lib/queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = SITE.domain;
@@ -64,7 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Blog
   const posts = await db.blogPost.findMany({
-    where: { status: "published" },
+    where: livePostWhere(),
     select: { slug: true, updatedAt: true, category: { select: { slug: true } } },
   });
   const blogPages: MetadataRoute.Sitemap = posts.map((p) => ({
