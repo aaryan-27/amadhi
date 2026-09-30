@@ -17,7 +17,7 @@
  * Prices are ASKING prices from our listings. Imports were floored at ₹5,999,
  * so minimums are not market truth and posts say so where the floor dominates.
  */
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -440,6 +440,27 @@ No. Amadhi is free for occupiers — you pay the operator directly.
 `;
 }
 
+
+/**
+ * Evergreen posts are hand-written markdown in content/blog/, not generated.
+ * These topics can't lean on our price data, so templating them would produce
+ * exactly the generic filler that earns no rankings and no citations.
+ * Frontmatter is a few plain key: value lines — no parser dependency needed.
+ */
+function readEvergreen(slug) {
+  const file = path.join(PROJECT, "content", "blog", `${slug}.md`);
+  if (!existsSync(file)) return null;
+  const raw = readFileSync(file, "utf8");
+  const m = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!m) return null;
+  const meta = {};
+  for (const line of m[1].split("\n")) {
+    const kv = line.match(/^(\w+):\s*(.*)$/);
+    if (kv) meta[kv[1]] = kv[2].trim();
+  }
+  return { meta, body: m[2].trim() };
+}
+
 /** Per-seat medians for a city, used by the team-size posts. */
 async function citySeatStats(cityName) {
   const grab = async (types) => {
@@ -454,7 +475,9 @@ async function citySeatStats(cityName) {
 }
 
 const plan = JSON.parse(readFileSync(path.join(PROJECT, "docs", "13-content-plan.json"), "utf8"));
-const KINDS = KIND === "all" ? ["locality-price", "locality-best", "city-product", "team-size"] : KIND.split(",");
+const KINDS = KIND === "all"
+  ? ["locality-price", "locality-best", "city-product", "team-size", "evergreen"]
+  : KIND.split(",");
 const selected = plan.topics.filter((t) => KINDS.includes(t.kind)).slice(0, LIMIT);
 
 const author = await db.author.findFirst({ where: { role: { contains: "SEO" } } }) ?? await db.author.findFirst();
@@ -517,6 +540,24 @@ async function renderTopic(t) {
       tags: [t.city.toLowerCase(), "managed-office"],
     };
   }
+  if (t.kind === "evergreen") {
+    const file = readEvergreen(t.slug);
+    if (!file) { console.log(`  ! no content/blog/${t.slug}.md — write it first`); return null; }
+    const tags = (file.meta.tags ?? "").split(",").map((x) => x.trim()).filter(Boolean);
+    const cover = (await db.listing.findFirst({
+      where: { status: "published", images: { some: {} }, ...(tags[0] ? { city: { slug: tags[0] } } : {}) },
+      orderBy: { slug: "asc" },
+      select: { images: { select: { url: true }, take: 1 } },
+    }))?.images[0]?.url ?? "";
+    return {
+      body: file.body, cover,
+      excerpt: file.meta.excerpt ?? "",
+      seoDesc: file.meta.seoDesc ?? file.meta.excerpt ?? "",
+      tags,
+      title: file.meta.title,
+      category: file.meta.category,
+    };
+  }
   return null;
 }
 
@@ -528,13 +569,13 @@ for (const t of selected) {
   const words = r.body.split(/\s+/).length;
   if (!APPLY) { console.log(`  [dry] ${t.slug} — ${words} words`); written++; continue; }
 
-  const category = await db.blogCategory.findFirst({ where: { name: t.category } });
+  const category = await db.blogCategory.findFirst({ where: { name: r.category ?? t.category } });
   if (!category) { console.log(`  ! no category "${t.category}" for ${t.slug}`); skipped++; continue; }
   const existing = await db.blogPost.findUnique({ where: { slug: t.slug } });
   const data = {
-    slug: t.slug, title: t.title, excerpt: r.excerpt, body: r.body,
+    slug: t.slug, title: r.title ?? t.title, excerpt: r.excerpt, body: r.body,
     coverImage: r.cover, categoryId: category.id, authorId: author.id,
-    seoTitle: `${t.title} | Amadhi`, seoDesc: r.seoDesc,
+    seoTitle: `${r.title ?? t.title} | Amadhi`, seoDesc: r.seoDesc,
     // Never demote something already live.
     ...(existing && existing.status !== "draft" ? {} : { status: "draft" }),
     readMins: Math.max(3, Math.round(words / 220)),

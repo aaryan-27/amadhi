@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-30T18:10:48.349Z",
+  "generatedAt": "2026-09-30T18:36:18.438Z",
   "note": "Prices are asking prices from Amadhi's own listings; the ₹5,999 import floor means minimums are not market truth.",
-  "total": 100,
+  "total": 108,
   "topics": [
     {
       "kind": "locality-price",
@@ -801,6 +801,966 @@
         "Is Sector 125 cheaper than nearby Noida micro-markets?",
         "What is included in a coworking seat price in Sector 125?",
         "How many coworking spaces are there in Sector 125?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Gurugram",
+      "loc": "Huda City Centre",
+      "citySlug": "gurugram",
+      "localitySlug": "huda-city-centre",
+      "title": "Coworking Space Price in Huda City Centre, Gurugram (2026)",
+      "slug": "coworking-space-price-huda-city-centre-gurugram",
+      "targetQuery": "coworking space price in huda city centre",
+      "facts": {
+        "listings": 13,
+        "operators": 12,
+        "pricedSeats": 33,
+        "median": 15000,
+        "p25": 10000,
+        "p75": 19799,
+        "floorDominated": false,
+        "floorShare": 6
+      },
+      "internalLinks": [
+        "/coworking-space/gurugram/huda-city-centre",
+        "/coworking-space/gurugram"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Huda City Centre?",
+        "What is the cheapest coworking space in Huda City Centre?",
+        "Is Huda City Centre cheaper than nearby Gurugram micro-markets?",
+        "What is included in a coworking seat price in Huda City Centre?",
+        "How many coworking spaces are there in Huda City Centre?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Okhla",
+      "citySlug": "delhi",
+      "localitySlug": "okhla",
+      "title": "Coworking Space Price in Okhla, Delhi (2026)",
+      "slug": "coworking-space-price-okhla-delhi",
+      "targetQuery": "coworking space price in okhla",
+      "facts": {
+        "listings": 12,
+        "operators": 11,
+        "pricedSeats": 29,
+        "median": 7499,
+        "p25": 5999,
+        "p75": 9499,
+        "floorDominated": false,
+        "floorShare": 31
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/okhla",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Okhla?",
+        "What is the cheapest coworking space in Okhla?",
+        "Is Okhla cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Okhla?",
+        "How many coworking spaces are there in Okhla?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Jasola",
+      "citySlug": "delhi",
+      "localitySlug": "jasola",
+      "title": "Coworking Space Price in Jasola, Delhi (2026)",
+      "slug": "coworking-space-price-jasola-delhi",
+      "targetQuery": "coworking space price in jasola",
+      "facts": {
+        "listings": 12,
+        "operators": 2,
+        "pricedSeats": 6,
+        "median": 18000,
+        "p25": 9000,
+        "p75": 18000,
+        "floorDominated": false,
+        "floorShare": 0
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/jasola",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Jasola?",
+        "What is the cheapest coworking space in Jasola?",
+        "Is Jasola cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Jasola?",
+        "How many coworking spaces are there in Jasola?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Dwarka",
+      "citySlug": "delhi",
+      "localitySlug": "dwarka",
+      "title": "Coworking Space Price in Dwarka, Delhi (2026)",
+      "slug": "coworking-space-price-dwarka-delhi",
+      "targetQuery": "coworking space price in dwarka",
+      "facts": {
+        "listings": 11,
+        "operators": 10,
+        "pricedSeats": 28,
+        "median": 6000,
+        "p25": 5999,
+        "p75": 7499,
+        "floorDominated": true,
+        "floorShare": 46
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/dwarka",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Dwarka?",
+        "What is the cheapest coworking space in Dwarka?",
+        "Is Dwarka cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Dwarka?",
+        "How many coworking spaces are there in Dwarka?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Sector 135",
+      "citySlug": "noida",
+      "localitySlug": "sector-135",
+      "title": "Coworking Space Price in Sector 135, Noida (2026)",
+      "slug": "coworking-space-price-sector-135-noida",
+      "targetQuery": "coworking space price in sector 135",
+      "facts": {
+        "listings": 10,
+        "operators": 4,
+        "pricedSeats": 9,
+        "median": 11607,
+        "p25": 5999,
+        "p75": 12199,
+        "floorDominated": true,
+        "floorShare": 44
+      },
+      "internalLinks": [
+        "/coworking-space/noida/sector-135",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 135?",
+        "What is the cheapest coworking space in Sector 135?",
+        "Is Sector 135 cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Sector 135?",
+        "How many coworking spaces are there in Sector 135?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Sector 132",
+      "citySlug": "noida",
+      "localitySlug": "sector-132",
+      "title": "Coworking Space Price in Sector 132, Noida (2026)",
+      "slug": "coworking-space-price-sector-132-noida",
+      "targetQuery": "coworking space price in sector 132",
+      "facts": {
+        "listings": 10,
+        "operators": 6,
+        "pricedSeats": 11,
+        "median": 6500,
+        "p25": 5999,
+        "p75": 7500,
+        "floorDominated": false,
+        "floorShare": 27
+      },
+      "internalLinks": [
+        "/coworking-space/noida/sector-132",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 132?",
+        "What is the cheapest coworking space in Sector 132?",
+        "Is Sector 132 cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Sector 132?",
+        "How many coworking spaces are there in Sector 132?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Jhandewalan",
+      "citySlug": "delhi",
+      "localitySlug": "jhandewalan",
+      "title": "Coworking Space Price in Jhandewalan, Delhi (2026)",
+      "slug": "coworking-space-price-jhandewalan-delhi",
+      "targetQuery": "coworking space price in jhandewalan",
+      "facts": {
+        "listings": 10,
+        "operators": 9,
+        "pricedSeats": 23,
+        "median": 7999,
+        "p25": 7000,
+        "p75": 13099,
+        "floorDominated": false,
+        "floorShare": 9
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/jhandewalan",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Jhandewalan?",
+        "What is the cheapest coworking space in Jhandewalan?",
+        "Is Jhandewalan cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Jhandewalan?",
+        "How many coworking spaces are there in Jhandewalan?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Sector 142",
+      "citySlug": "noida",
+      "localitySlug": "sector-142",
+      "title": "Coworking Space Price in Sector 142, Noida (2026)",
+      "slug": "coworking-space-price-sector-142-noida",
+      "targetQuery": "coworking space price in sector 142",
+      "facts": {
+        "listings": 9,
+        "operators": 5,
+        "pricedSeats": 14,
+        "median": 8000,
+        "p25": 7000,
+        "p75": 8000,
+        "floorDominated": false,
+        "floorShare": 0
+      },
+      "internalLinks": [
+        "/coworking-space/noida/sector-142",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 142?",
+        "What is the cheapest coworking space in Sector 142?",
+        "Is Sector 142 cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Sector 142?",
+        "How many coworking spaces are there in Sector 142?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Green Park",
+      "citySlug": "delhi",
+      "localitySlug": "green-park",
+      "title": "Coworking Space Price in Green Park, Delhi (2026)",
+      "slug": "coworking-space-price-green-park-delhi",
+      "targetQuery": "coworking space price in green park",
+      "facts": {
+        "listings": 9,
+        "operators": 8,
+        "pricedSeats": 18,
+        "median": 9999,
+        "p25": 7000,
+        "p75": 9999,
+        "floorDominated": false,
+        "floorShare": 11
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/green-park",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Green Park?",
+        "What is the cheapest coworking space in Green Park?",
+        "Is Green Park cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Green Park?",
+        "How many coworking spaces are there in Green Park?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Gurugram",
+      "loc": "Nirvana Country",
+      "citySlug": "gurugram",
+      "localitySlug": "nirvana-country",
+      "title": "Coworking Space Price in Nirvana Country, Gurugram (2026)",
+      "slug": "coworking-space-price-nirvana-country-gurugram",
+      "targetQuery": "coworking space price in nirvana country",
+      "facts": {
+        "listings": 9,
+        "operators": 8,
+        "pricedSeats": 25,
+        "median": 7500,
+        "p25": 6499,
+        "p75": 8999,
+        "floorDominated": false,
+        "floorShare": 20
+      },
+      "internalLinks": [
+        "/coworking-space/gurugram/nirvana-country",
+        "/coworking-space/gurugram"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Nirvana Country?",
+        "What is the cheapest coworking space in Nirvana Country?",
+        "Is Nirvana Country cheaper than nearby Gurugram micro-markets?",
+        "What is included in a coworking seat price in Nirvana Country?",
+        "How many coworking spaces are there in Nirvana Country?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Film City",
+      "citySlug": "noida",
+      "localitySlug": "film-city",
+      "title": "Coworking Space Price in Film City, Noida (2026)",
+      "slug": "coworking-space-price-film-city-noida",
+      "targetQuery": "coworking space price in film city",
+      "facts": {
+        "listings": 9,
+        "operators": 4,
+        "pricedSeats": 9,
+        "median": 6500,
+        "p25": 6000,
+        "p75": 6500,
+        "floorDominated": false,
+        "floorShare": 22
+      },
+      "internalLinks": [
+        "/coworking-space/noida/film-city",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Film City?",
+        "What is the cheapest coworking space in Film City?",
+        "Is Film City cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Film City?",
+        "How many coworking spaces are there in Film City?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Greater Kailash",
+      "citySlug": "delhi",
+      "localitySlug": "greater-kailash",
+      "title": "Coworking Space Price in Greater Kailash, Delhi (2026)",
+      "slug": "coworking-space-price-greater-kailash-delhi",
+      "targetQuery": "coworking space price in greater kailash",
+      "facts": {
+        "listings": 7,
+        "operators": 3,
+        "pricedSeats": 13,
+        "median": 14999,
+        "p25": 9999,
+        "p75": 15999,
+        "floorDominated": false,
+        "floorShare": 0
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/greater-kailash",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Greater Kailash?",
+        "What is the cheapest coworking space in Greater Kailash?",
+        "Is Greater Kailash cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Greater Kailash?",
+        "How many coworking spaces are there in Greater Kailash?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Rohini",
+      "citySlug": "delhi",
+      "localitySlug": "rohini",
+      "title": "Coworking Space Price in Rohini, Delhi (2026)",
+      "slug": "coworking-space-price-rohini-delhi",
+      "targetQuery": "coworking space price in rohini",
+      "facts": {
+        "listings": 7,
+        "operators": 7,
+        "pricedSeats": 19,
+        "median": 5999,
+        "p25": 5999,
+        "p75": 8499,
+        "floorDominated": true,
+        "floorShare": 53
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/rohini",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Rohini?",
+        "What is the cheapest coworking space in Rohini?",
+        "Is Rohini cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Rohini?",
+        "How many coworking spaces are there in Rohini?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Okhla Phase II",
+      "citySlug": "delhi",
+      "localitySlug": "okhla-phase-ii",
+      "title": "Coworking Space Price in Okhla Phase II, Delhi (2026)",
+      "slug": "coworking-space-price-okhla-phase-ii-delhi",
+      "targetQuery": "coworking space price in okhla phase ii",
+      "facts": {
+        "listings": 6,
+        "operators": 3,
+        "pricedSeats": 7,
+        "median": 6999,
+        "p25": 5999,
+        "p75": 7999,
+        "floorDominated": false,
+        "floorShare": 29
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/okhla-phase-ii",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Okhla Phase II?",
+        "What is the cheapest coworking space in Okhla Phase II?",
+        "Is Okhla Phase II cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Okhla Phase II?",
+        "How many coworking spaces are there in Okhla Phase II?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Sector 1",
+      "citySlug": "noida",
+      "localitySlug": "sector-1",
+      "title": "Coworking Space Price in Sector 1, Noida (2026)",
+      "slug": "coworking-space-price-sector-1-noida",
+      "targetQuery": "coworking space price in sector 1",
+      "facts": {
+        "listings": 5,
+        "operators": 5,
+        "pricedSeats": 15,
+        "median": 7499,
+        "p25": 6000,
+        "p75": 8999,
+        "floorDominated": false,
+        "floorShare": 13
+      },
+      "internalLinks": [
+        "/coworking-space/noida/sector-1",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 1?",
+        "What is the cheapest coworking space in Sector 1?",
+        "Is Sector 1 cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Sector 1?",
+        "How many coworking spaces are there in Sector 1?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Sector 4",
+      "citySlug": "noida",
+      "localitySlug": "sector-4",
+      "title": "Coworking Space Price in Sector 4, Noida (2026)",
+      "slug": "coworking-space-price-sector-4-noida",
+      "targetQuery": "coworking space price in sector 4",
+      "facts": {
+        "listings": 5,
+        "operators": 5,
+        "pricedSeats": 12,
+        "median": 6500,
+        "p25": 5999,
+        "p75": 6500,
+        "floorDominated": true,
+        "floorShare": 50
+      },
+      "internalLinks": [
+        "/coworking-space/noida/sector-4",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 4?",
+        "What is the cheapest coworking space in Sector 4?",
+        "Is Sector 4 cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Sector 4?",
+        "How many coworking spaces are there in Sector 4?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Sector 137",
+      "citySlug": "noida",
+      "localitySlug": "sector-137",
+      "title": "Coworking Space Price in Sector 137, Noida (2026)",
+      "slug": "coworking-space-price-sector-137-noida",
+      "targetQuery": "coworking space price in sector 137",
+      "facts": {
+        "listings": 5,
+        "operators": 5,
+        "pricedSeats": 13,
+        "median": 7499,
+        "p25": 6000,
+        "p75": 7500,
+        "floorDominated": false,
+        "floorShare": 15
+      },
+      "internalLinks": [
+        "/coworking-space/noida/sector-137",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 137?",
+        "What is the cheapest coworking space in Sector 137?",
+        "Is Sector 137 cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Sector 137?",
+        "How many coworking spaces are there in Sector 137?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Greater Noida",
+      "citySlug": "noida",
+      "localitySlug": "greater-noida",
+      "title": "Coworking Space Price in Greater Noida, Noida (2026)",
+      "slug": "coworking-space-price-greater-noida-noida",
+      "targetQuery": "coworking space price in greater noida",
+      "facts": {
+        "listings": 5,
+        "operators": 5,
+        "pricedSeats": 9,
+        "median": 6000,
+        "p25": 5999,
+        "p75": 6000,
+        "floorDominated": false,
+        "floorShare": 33
+      },
+      "internalLinks": [
+        "/coworking-space/noida/greater-noida",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Greater Noida?",
+        "What is the cheapest coworking space in Greater Noida?",
+        "Is Greater Noida cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Greater Noida?",
+        "How many coworking spaces are there in Greater Noida?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Laxmi Nagar",
+      "citySlug": "delhi",
+      "localitySlug": "laxmi-nagar",
+      "title": "Coworking Space Price in Laxmi Nagar, Delhi (2026)",
+      "slug": "coworking-space-price-laxmi-nagar-delhi",
+      "targetQuery": "coworking space price in laxmi nagar",
+      "facts": {
+        "listings": 5,
+        "operators": 5,
+        "pricedSeats": 7,
+        "median": 6000,
+        "p25": 5999,
+        "p75": 6999,
+        "floorDominated": false,
+        "floorShare": 29
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/laxmi-nagar",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Laxmi Nagar?",
+        "What is the cheapest coworking space in Laxmi Nagar?",
+        "Is Laxmi Nagar cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Laxmi Nagar?",
+        "How many coworking spaces are there in Laxmi Nagar?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Sector 8",
+      "citySlug": "noida",
+      "localitySlug": "sector-8",
+      "title": "Coworking Space Price in Sector 8, Noida (2026)",
+      "slug": "coworking-space-price-sector-8-noida",
+      "targetQuery": "coworking space price in sector 8",
+      "facts": {
+        "listings": 4,
+        "operators": 4,
+        "pricedSeats": 12,
+        "median": 5999,
+        "p25": 5999,
+        "p75": 6500,
+        "floorDominated": true,
+        "floorShare": 67
+      },
+      "internalLinks": [
+        "/coworking-space/noida/sector-8",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 8?",
+        "What is the cheapest coworking space in Sector 8?",
+        "Is Sector 8 cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Sector 8?",
+        "How many coworking spaces are there in Sector 8?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Malviya Nagar",
+      "citySlug": "delhi",
+      "localitySlug": "malviya-nagar",
+      "title": "Coworking Space Price in Malviya Nagar, Delhi (2026)",
+      "slug": "coworking-space-price-malviya-nagar-delhi",
+      "targetQuery": "coworking space price in malviya nagar",
+      "facts": {
+        "listings": 4,
+        "operators": 4,
+        "pricedSeats": 9,
+        "median": 6499,
+        "p25": 6499,
+        "p75": 33500,
+        "floorDominated": false,
+        "floorShare": 22
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/malviya-nagar",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Malviya Nagar?",
+        "What is the cheapest coworking space in Malviya Nagar?",
+        "Is Malviya Nagar cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Malviya Nagar?",
+        "How many coworking spaces are there in Malviya Nagar?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Preet Vihar",
+      "citySlug": "delhi",
+      "localitySlug": "preet-vihar",
+      "title": "Coworking Space Price in Preet Vihar, Delhi (2026)",
+      "slug": "coworking-space-price-preet-vihar-delhi",
+      "targetQuery": "coworking space price in preet vihar",
+      "facts": {
+        "listings": 4,
+        "operators": 4,
+        "pricedSeats": 11,
+        "median": 7999,
+        "p25": 6999,
+        "p75": 9000,
+        "floorDominated": false,
+        "floorShare": 0
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/preet-vihar",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Preet Vihar?",
+        "What is the cheapest coworking space in Preet Vihar?",
+        "Is Preet Vihar cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Preet Vihar?",
+        "How many coworking spaces are there in Preet Vihar?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Shahpur Jat",
+      "citySlug": "delhi",
+      "localitySlug": "shahpur-jat",
+      "title": "Coworking Space Price in Shahpur Jat, Delhi (2026)",
+      "slug": "coworking-space-price-shahpur-jat-delhi",
+      "targetQuery": "coworking space price in shahpur jat",
+      "facts": {
+        "listings": 4,
+        "operators": 3,
+        "pricedSeats": 12,
+        "median": 8499,
+        "p25": 5999,
+        "p75": 11000,
+        "floorDominated": true,
+        "floorShare": 42
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/shahpur-jat",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Shahpur Jat?",
+        "What is the cheapest coworking space in Shahpur Jat?",
+        "Is Shahpur Jat cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Shahpur Jat?",
+        "How many coworking spaces are there in Shahpur Jat?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Gurugram",
+      "loc": "Sector 24",
+      "citySlug": "gurugram",
+      "localitySlug": "sector-24",
+      "title": "Coworking Space Price in Sector 24, Gurugram (2026)",
+      "slug": "coworking-space-price-sector-24-gurugram",
+      "targetQuery": "coworking space price in sector 24",
+      "facts": {
+        "listings": 4,
+        "operators": 2,
+        "pricedSeats": 8,
+        "median": 25000,
+        "p25": 24000,
+        "p75": 30000,
+        "floorDominated": false,
+        "floorShare": 0
+      },
+      "internalLinks": [
+        "/coworking-space/gurugram/sector-24",
+        "/coworking-space/gurugram"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 24?",
+        "What is the cheapest coworking space in Sector 24?",
+        "Is Sector 24 cheaper than nearby Gurugram micro-markets?",
+        "What is included in a coworking seat price in Sector 24?",
+        "How many coworking spaces are there in Sector 24?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Gurugram",
+      "loc": "Sector 39",
+      "citySlug": "gurugram",
+      "localitySlug": "sector-39",
+      "title": "Coworking Space Price in Sector 39, Gurugram (2026)",
+      "slug": "coworking-space-price-sector-39-gurugram",
+      "targetQuery": "coworking space price in sector 39",
+      "facts": {
+        "listings": 3,
+        "operators": 2,
+        "pricedSeats": 8,
+        "median": 9999,
+        "p25": 9999,
+        "p75": 10999,
+        "floorDominated": false,
+        "floorShare": 0
+      },
+      "internalLinks": [
+        "/coworking-space/gurugram/sector-39",
+        "/coworking-space/gurugram"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 39?",
+        "What is the cheapest coworking space in Sector 39?",
+        "Is Sector 39 cheaper than nearby Gurugram micro-markets?",
+        "What is included in a coworking seat price in Sector 39?",
+        "How many coworking spaces are there in Sector 39?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Gurugram",
+      "loc": "Sector 32",
+      "citySlug": "gurugram",
+      "localitySlug": "sector-32",
+      "title": "Coworking Space Price in Sector 32, Gurugram (2026)",
+      "slug": "coworking-space-price-sector-32-gurugram",
+      "targetQuery": "coworking space price in sector 32",
+      "facts": {
+        "listings": 3,
+        "operators": 3,
+        "pricedSeats": 5,
+        "median": 8000,
+        "p25": 8000,
+        "p75": 8500,
+        "floorDominated": false,
+        "floorShare": 0
+      },
+      "internalLinks": [
+        "/coworking-space/gurugram/sector-32",
+        "/coworking-space/gurugram"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 32?",
+        "What is the cheapest coworking space in Sector 32?",
+        "Is Sector 32 cheaper than nearby Gurugram micro-markets?",
+        "What is included in a coworking seat price in Sector 32?",
+        "How many coworking spaces are there in Sector 32?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Sector 58",
+      "citySlug": "noida",
+      "localitySlug": "sector-58",
+      "title": "Coworking Space Price in Sector 58, Noida (2026)",
+      "slug": "coworking-space-price-sector-58-noida",
+      "targetQuery": "coworking space price in sector 58",
+      "facts": {
+        "listings": 3,
+        "operators": 3,
+        "pricedSeats": 9,
+        "median": 6500,
+        "p25": 6500,
+        "p75": 7000,
+        "floorDominated": false,
+        "floorShare": 22
+      },
+      "internalLinks": [
+        "/coworking-space/noida/sector-58",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 58?",
+        "What is the cheapest coworking space in Sector 58?",
+        "Is Sector 58 cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Sector 58?",
+        "How many coworking spaces are there in Sector 58?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Noida",
+      "loc": "Sector 6",
+      "citySlug": "noida",
+      "localitySlug": "sector-6",
+      "title": "Coworking Space Price in Sector 6, Noida (2026)",
+      "slug": "coworking-space-price-sector-6-noida",
+      "targetQuery": "coworking space price in sector 6",
+      "facts": {
+        "listings": 3,
+        "operators": 3,
+        "pricedSeats": 8,
+        "median": 5999,
+        "p25": 5999,
+        "p75": 7000,
+        "floorDominated": true,
+        "floorShare": 63
+      },
+      "internalLinks": [
+        "/coworking-space/noida/sector-6",
+        "/coworking-space/noida"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Sector 6?",
+        "What is the cheapest coworking space in Sector 6?",
+        "Is Sector 6 cheaper than nearby Noida micro-markets?",
+        "What is included in a coworking seat price in Sector 6?",
+        "How many coworking spaces are there in Sector 6?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Asaf Ali Road",
+      "citySlug": "delhi",
+      "localitySlug": "asaf-ali-road",
+      "title": "Coworking Space Price in Asaf Ali Road, Delhi (2026)",
+      "slug": "coworking-space-price-asaf-ali-road-delhi",
+      "targetQuery": "coworking space price in asaf ali road",
+      "facts": {
+        "listings": 3,
+        "operators": 2,
+        "pricedSeats": 9,
+        "median": 5999,
+        "p25": 5999,
+        "p75": 6999,
+        "floorDominated": true,
+        "floorShare": 67
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/asaf-ali-road",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Asaf Ali Road?",
+        "What is the cheapest coworking space in Asaf Ali Road?",
+        "Is Asaf Ali Road cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Asaf Ali Road?",
+        "How many coworking spaces are there in Asaf Ali Road?"
+      ]
+    },
+    {
+      "kind": "locality-price",
+      "category": "Coworking",
+      "city": "Delhi",
+      "loc": "Lado Sarai",
+      "citySlug": "delhi",
+      "localitySlug": "lado-sarai",
+      "title": "Coworking Space Price in Lado Sarai, Delhi (2026)",
+      "slug": "coworking-space-price-lado-sarai-delhi",
+      "targetQuery": "coworking space price in lado sarai",
+      "facts": {
+        "listings": 3,
+        "operators": 3,
+        "pricedSeats": 8,
+        "median": 7499,
+        "p25": 5999,
+        "p75": 9999,
+        "floorDominated": false,
+        "floorShare": 38
+      },
+      "internalLinks": [
+        "/coworking-space/delhi/lado-sarai",
+        "/coworking-space/delhi"
+      ],
+      "faqs": [
+        "How much does a coworking desk cost in Lado Sarai?",
+        "What is the cheapest coworking space in Lado Sarai?",
+        "Is Lado Sarai cheaper than nearby Delhi micro-markets?",
+        "What is included in a coworking seat price in Lado Sarai?",
+        "How many coworking spaces are there in Lado Sarai?"
       ]
     },
     {
@@ -1807,57 +2767,9 @@
     {
       "kind": "evergreen",
       "category": "Office Leasing",
-      "title": "Managed Office vs Conventional Lease: Cost Comparison",
+      "title": "Managed Office vs Conventional Lease: What Actually Differs",
       "slug": "managed-office-vs-conventional-lease",
-      "targetQuery": "managed office vs conventional lease: cost comparison",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Virtual Office",
-      "title": "Virtual Office vs Coworking Address: What You Actually Need",
-      "slug": "virtual-office-vs-coworking-address",
-      "targetQuery": "virtual office vs coworking address: what you actually need",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Real Estate",
-      "title": "Cyber City vs Golf Course Road: Where Should Your Office Be?",
-      "slug": "cyber-city-vs-golf-course-road",
-      "targetQuery": "cyber city vs golf course road: where should your office be?",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Real Estate",
-      "title": "Noida Sector 62 vs Sector 63: Office Market Compared",
-      "slug": "noida-sector-62-vs-63",
-      "targetQuery": "noida sector 62 vs sector 63: office market compared",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Real Estate",
-      "title": "Gurugram vs Noida vs Delhi: Where Is Office Space Cheapest?",
-      "slug": "gurugram-vs-noida-vs-delhi-office-cost",
-      "targetQuery": "gurugram vs noida vs delhi: where is office space cheapest?",
+      "targetQuery": "managed office vs conventional lease: what actually differs",
       "facts": {},
       "internalLinks": [
         "/coworking-space/gurugram"
@@ -1878,22 +2790,10 @@
     },
     {
       "kind": "evergreen",
-      "category": "Virtual Office",
-      "title": "Documents Required for a Virtual Office in India",
-      "slug": "virtual-office-documents-required",
-      "targetQuery": "documents required for a virtual office in india",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
       "category": "Business",
-      "title": "Coworking Agreement: Clauses to Check Before You Sign",
+      "title": "Coworking Agreements: The Clauses That Cost You Later",
       "slug": "coworking-agreement-clauses",
-      "targetQuery": "coworking agreement: clauses to check before you sign",
+      "targetQuery": "coworking agreements: the clauses that cost you later",
       "facts": {},
       "internalLinks": [
         "/coworking-space/gurugram"
@@ -1903,33 +2803,9 @@
     {
       "kind": "evergreen",
       "category": "Business",
-      "title": "Security Deposit and Lock-in in Indian Coworking Spaces",
+      "title": "Security Deposit and Lock-In in Indian Coworking",
       "slug": "coworking-security-deposit-lock-in",
-      "targetQuery": "security deposit and lock-in in indian coworking spaces",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Business",
-      "title": "Notice Period in Coworking and Managed Office Contracts",
-      "slug": "coworking-notice-period",
-      "targetQuery": "notice period in coworking and managed office contracts",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Managed Offices",
-      "title": "What Is a Managed Office? A Plain-English Guide",
-      "slug": "what-is-a-managed-office",
-      "targetQuery": "what is a managed office? a plain-english guide",
+      "targetQuery": "security deposit and lock-in in indian coworking",
       "facts": {},
       "internalLinks": [
         "/coworking-space/gurugram"
@@ -1962,54 +2838,6 @@
     },
     {
       "kind": "evergreen",
-      "category": "Office Leasing",
-      "title": "Fit-Out Costs for an Office in Delhi NCR",
-      "slug": "office-fit-out-cost-ncr",
-      "targetQuery": "fit-out costs for an office in delhi ncr",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Office Leasing",
-      "title": "CAM Charges Explained for NCR Office Tenants",
-      "slug": "cam-charges-explained",
-      "targetQuery": "cam charges explained for ncr office tenants",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Business",
-      "title": "Is Brokerage Payable on Coworking Spaces?",
-      "slug": "brokerage-on-coworking-spaces",
-      "targetQuery": "is brokerage payable on coworking spaces?",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Coworking",
-      "title": "How to Shortlist a Coworking Space: A 10-Point Checklist",
-      "slug": "coworking-shortlist-checklist",
-      "targetQuery": "how to shortlist a coworking space: a 10-point checklist",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
       "category": "Coworking",
       "title": "Questions to Ask on a Coworking Space Tour",
       "slug": "coworking-tour-questions",
@@ -2022,142 +2850,10 @@
     },
     {
       "kind": "evergreen",
-      "category": "Business",
-      "title": "Meeting Room Booking in Delhi NCR: Costs and Options",
-      "slug": "meeting-room-booking-ncr",
-      "targetQuery": "meeting room booking in delhi ncr: costs and options",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Business",
-      "title": "Day Offices and Hourly Workspace in NCR",
-      "slug": "hourly-workspace-ncr",
-      "targetQuery": "day offices and hourly workspace in ncr",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Virtual Office",
-      "title": "Setting Up a Registered Office Address in Gurugram",
-      "slug": "registered-office-address-gurugram",
-      "targetQuery": "setting up a registered office address in gurugram",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
       "category": "Real Estate",
-      "title": "Metro Connectivity and Office Location: Why It Matters",
-      "slug": "metro-connectivity-office-location",
-      "targetQuery": "metro connectivity and office location: why it matters",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Coworking",
-      "title": "Parking at NCR Coworking Spaces: What to Expect",
-      "slug": "coworking-parking-ncr",
-      "targetQuery": "parking at ncr coworking spaces: what to expect",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Coworking",
-      "title": "Internet and Power Backup Standards in NCR Workspaces",
-      "slug": "internet-power-backup-ncr",
-      "targetQuery": "internet and power backup standards in ncr workspaces",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Startup",
-      "title": "Scaling From 5 to 50 Seats Without Moving Twice",
-      "slug": "scaling-5-to-50-seats",
-      "targetQuery": "scaling from 5 to 50 seats without moving twice",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Startup",
-      "title": "Office Space Checklist for a Newly Funded Startup",
-      "slug": "funded-startup-office-checklist",
-      "targetQuery": "office space checklist for a newly funded startup",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Startup",
-      "title": "Hybrid Work: Sizing an Office for Part-Time Attendance",
-      "slug": "hybrid-work-office-sizing",
-      "targetQuery": "hybrid work: sizing an office for part-time attendance",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Real Estate",
-      "title": "GCC and Offshore Teams: Office Options in Delhi NCR",
-      "slug": "gcc-office-options-ncr",
-      "targetQuery": "gcc and offshore teams: office options in delhi ncr",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Managed Offices",
-      "title": "Enterprise Managed Offices: What Changes Above 100 Seats",
-      "slug": "enterprise-managed-office-100-seats",
-      "targetQuery": "enterprise managed offices: what changes above 100 seats",
-      "facts": {},
-      "internalLinks": [
-        "/coworking-space/gurugram"
-      ],
-      "faqs": []
-    },
-    {
-      "kind": "evergreen",
-      "category": "Real Estate",
-      "title": "Delhi NCR Coworking Price Report",
-      "slug": "ncr-coworking-price-report",
-      "targetQuery": "delhi ncr coworking price report",
+      "title": "Gurugram vs Noida vs Delhi: Where Should Your Office Be?",
+      "slug": "gurugram-vs-noida-vs-delhi-office",
+      "targetQuery": "gurugram vs noida vs delhi: where should your office be?",
       "facts": {},
       "internalLinks": [
         "/coworking-space/gurugram"

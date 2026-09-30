@@ -107,8 +107,10 @@ function buildPlan() {
   const topics = [];
   const push = (t) => topics.push({ ...t, faqs: faqsFor(t) });
 
-  // A. Locality price guides — the highest-intent, most citable pages (25)
-  for (const l of locs.slice(0, 25)) {
+  // A. Locality price guides — the highest-intent, most citable pages.
+  // Every locality with enough priced inventory earns one: these are the
+  // pages only Amadhi can write, so depth here beats generic advice posts.
+  for (const l of locs.slice(0, 55)) {
     push({
       kind: "locality-price",
       category: "Coworking",
@@ -184,38 +186,19 @@ function buildPlan() {
   }
 
   // E. Comparisons, compliance and buying-process posts — evergreen, high AEO value (31)
+  // E. Evergreen. Deliberately short: these can't lean on our price data, so
+  // each one has to justify itself on genuine buyer intent. Anything a
+  // chatbot already answers well was cut rather than padded out.
   const EVERGREEN = [
     ["Coworking vs Managed Office: Which Is Right for Your Team?", "coworking-vs-managed-office", "Managed Offices"],
-    ["Managed Office vs Conventional Lease: Cost Comparison", "managed-office-vs-conventional-lease", "Office Leasing"],
-    ["Virtual Office vs Coworking Address: What You Actually Need", "virtual-office-vs-coworking-address", "Virtual Office"],
-    ["Cyber City vs Golf Course Road: Where Should Your Office Be?", "cyber-city-vs-golf-course-road", "Real Estate"],
-    ["Noida Sector 62 vs Sector 63: Office Market Compared", "noida-sector-62-vs-63", "Real Estate"],
-    ["Gurugram vs Noida vs Delhi: Where Is Office Space Cheapest?", "gurugram-vs-noida-vs-delhi-office-cost", "Real Estate"],
+    ["Managed Office vs Conventional Lease: What Actually Differs", "managed-office-vs-conventional-lease", "Office Leasing"],
     ["How to Get GST Registration With a Virtual Office in Delhi NCR", "gst-registration-virtual-office-ncr", "Virtual Office"],
-    ["Documents Required for a Virtual Office in India", "virtual-office-documents-required", "Virtual Office"],
-    ["Coworking Agreement: Clauses to Check Before You Sign", "coworking-agreement-clauses", "Business"],
-    ["Security Deposit and Lock-in in Indian Coworking Spaces", "coworking-security-deposit-lock-in", "Business"],
-    ["Notice Period in Coworking and Managed Office Contracts", "coworking-notice-period", "Business"],
-    ["What Is a Managed Office? A Plain-English Guide", "what-is-a-managed-office", "Managed Offices"],
+    ["Coworking Agreements: The Clauses That Cost You Later", "coworking-agreement-clauses", "Business"],
+    ["Security Deposit and Lock-In in Indian Coworking", "coworking-security-deposit-lock-in", "Business"],
     ["Hot Desk vs Dedicated Desk vs Private Cabin", "hot-desk-vs-dedicated-desk-vs-cabin", "Coworking"],
     ["How Much Office Space Does a Team Need? Sq Ft Per Person", "sq-ft-per-person-office", "Office Leasing"],
-    ["Fit-Out Costs for an Office in Delhi NCR", "office-fit-out-cost-ncr", "Office Leasing"],
-    ["CAM Charges Explained for NCR Office Tenants", "cam-charges-explained", "Office Leasing"],
-    ["Is Brokerage Payable on Coworking Spaces?", "brokerage-on-coworking-spaces", "Business"],
-    ["How to Shortlist a Coworking Space: A 10-Point Checklist", "coworking-shortlist-checklist", "Coworking"],
     ["Questions to Ask on a Coworking Space Tour", "coworking-tour-questions", "Coworking"],
-    ["Meeting Room Booking in Delhi NCR: Costs and Options", "meeting-room-booking-ncr", "Business"],
-    ["Day Offices and Hourly Workspace in NCR", "hourly-workspace-ncr", "Business"],
-    ["Setting Up a Registered Office Address in Gurugram", "registered-office-address-gurugram", "Virtual Office"],
-    ["Metro Connectivity and Office Location: Why It Matters", "metro-connectivity-office-location", "Real Estate"],
-    ["Parking at NCR Coworking Spaces: What to Expect", "coworking-parking-ncr", "Coworking"],
-    ["Internet and Power Backup Standards in NCR Workspaces", "internet-power-backup-ncr", "Coworking"],
-    ["Scaling From 5 to 50 Seats Without Moving Twice", "scaling-5-to-50-seats", "Startup"],
-    ["Office Space Checklist for a Newly Funded Startup", "funded-startup-office-checklist", "Startup"],
-    ["Hybrid Work: Sizing an Office for Part-Time Attendance", "hybrid-work-office-sizing", "Startup"],
-    ["GCC and Offshore Teams: Office Options in Delhi NCR", "gcc-office-options-ncr", "Real Estate"],
-    ["Enterprise Managed Offices: What Changes Above 100 Seats", "enterprise-managed-office-100-seats", "Managed Offices"],
-    ["Delhi NCR Coworking Price Report", "ncr-coworking-price-report", "Real Estate"],
+    ["Gurugram vs Noida vs Delhi: Where Should Your Office Be?", "gurugram-vs-noida-vs-delhi-office", "Real Estate"],
   ];
   for (const [title, slug, category] of EVERGREEN) {
     push({ kind: "evergreen", category, title, slug, targetQuery: title.toLowerCase(), facts: {}, internalLinks: ["/coworking-space/gurugram"], faqs: [] });
