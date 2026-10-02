@@ -3,6 +3,21 @@ import { db } from "@/lib/db";
 import { PRODUCTS, CITIES, SITE } from "@/lib/site";
 import { LOCALITY_INDEX_THRESHOLD, livePostWhere } from "@/lib/queries";
 
+/**
+ * Rebuild hourly.
+ *
+ * Without this the sitemap is generated once at build time and frozen. Posts
+ * publish themselves on a schedule (see livePostWhere), so a static sitemap
+ * would keep announcing yesterday's set and every new post would stay
+ * invisible to search engines until someone happened to redeploy — which
+ * would quietly waste the entire publishing queue.
+ *
+ * Hourly is a deliberate compromise: this query walks every listing, locality
+ * and post, so it is not something to run on each request, and posts go live
+ * at 09:30 IST rather than needing to-the-minute freshness.
+ */
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = SITE.domain;
   const now = new Date();
