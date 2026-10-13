@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { enquirySchema, isTooFast } from "@/lib/validation";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
+import { sendLeadToCrm } from "@/lib/crm";
 
 /** First-response SLA: 1 hour from lead creation. */
 const SLA_MS = 60 * 60 * 1000;
@@ -69,6 +70,26 @@ export async function POST(req: Request) {
       body: listing ? `For ${listing.name}` : city ? `In ${city.name}` : "General",
       kind: "lead",
     },
+  });
+
+  const leadCity = city ?? (listing ? await db.city.findUnique({ where: { id: listing.cityId } }) : null);
+  sendLeadToCrm({
+    websiteLeadId: lead.id,
+    type: d.type,
+    name: d.name,
+    phone: d.phone,
+    email: d.email,
+    message: d.message,
+    company: d.companyName,
+    productType: d.productType,
+    seats: d.seats,
+    budget: d.budget,
+    moveIn: d.moveIn,
+    city: leadCity?.name,
+    locality: locality?.name,
+    listing: listing ? { name: listing.name, slug: listing.slug } : null,
+    utm: d.utm,
+    landingPage: req.headers.get("referer"),
   });
 
   return NextResponse.json({ ok: true, id: lead.id }, { status: 201 });

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { visitSchema, isTooFast } from "@/lib/validation";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
+import { sendLeadToCrm } from "@/lib/crm";
 
 export async function POST(req: Request) {
   if (!rateLimit(`visits:${clientIp(req)}`, 6, 60_000)) {
@@ -32,7 +33,7 @@ export async function POST(req: Request) {
   });
 
   // A visit is also a lead in the pipeline
-  await db.lead.create({
+  const lead = await db.lead.create({
     data: {
       type: "visit",
       name: d.name,
@@ -47,6 +48,25 @@ export async function POST(req: Request) {
   });
   await db.notification.create({
     data: { title: `Visit request: ${d.name}`, body: `${listing.name} — ${d.date} ${d.slot}`, kind: "visit" },
+  });
+
+  const [city, locality] = await Promise.all([
+    db.city.findUnique({ where: { id: listing.cityId } }),
+    db.locality.findUnique({ where: { id: listing.localityId } }),
+  ]);
+  sendLeadToCrm({
+    websiteLeadId: lead.id,
+    type: "visit",
+    name: d.name,
+    phone: d.phone,
+    email: d.email,
+    message: lead.message,
+    city: city?.name,
+    locality: locality?.name,
+    listing: { name: listing.name, slug: listing.slug },
+    visitDate: d.date,
+    visitSlot: d.slot,
+    landingPage: req.headers.get("referer"),
   });
 
   return NextResponse.json({ ok: true, id: visit.id }, { status: 201 });
