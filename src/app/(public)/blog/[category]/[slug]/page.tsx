@@ -8,6 +8,7 @@ import { renderMarkdown, extractFaqs } from "@/lib/markdown";
 import { PRODUCTS, CITIES } from "@/lib/site";
 import { Section, Breadcrumbs, Badge } from "@/components/ui/primitives";
 import { JsonLd, breadcrumbLd, articleLd, faqLd } from "@/components/seo/jsonld";
+import { BlogVisit } from "@/components/analytics/blog-visit";
 
 export const revalidate = 300;
 
@@ -77,6 +78,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   return (
     <>
+      <BlogVisit slug={post.slug} />
       <JsonLd
         data={[
           breadcrumbLd(crumbs),

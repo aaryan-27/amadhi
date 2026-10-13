@@ -1,4 +1,5 @@
 import { after } from "next/server";
+import { db } from "@/lib/db";
 import { SITE, productByType } from "@/lib/site";
 
 /**
@@ -33,7 +34,18 @@ export type CrmLead = {
   visitSlot?: string | null;
   utm?: Record<string, string> | null;
   landingPage?: string | null;
+  blogPost?: { title: string; slug: string; categorySlug: string } | null;
 };
+
+/** Resolve the attributed blog slug to the post's title and URL. */
+export async function findBlogPost(slug?: string | null) {
+  if (!slug) return null;
+  const post = await db.blogPost.findUnique({
+    where: { slug },
+    select: { title: true, slug: true, category: { select: { slug: true } } },
+  });
+  return post ? { title: post.title, slug: post.slug, categorySlug: post.category.slug } : null;
+}
 
 export function crmPayload(lead: CrmLead) {
   return {
@@ -56,6 +68,10 @@ export function crmPayload(lead: CrmLead) {
     visit_slot: lead.visitSlot || null,
     utm: lead.utm ?? {},
     landing_page: lead.landingPage || null,
+    blog_post: lead.blogPost?.title ?? null,
+    blog_url: lead.blogPost
+      ? `${SITE.domain}/blog/${lead.blogPost.categorySlug}/${lead.blogPost.slug}`
+      : null,
   };
 }
 

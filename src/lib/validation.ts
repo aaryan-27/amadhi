@@ -6,6 +6,9 @@ const indianPhone = z
   .regex(/^(\+?91[\s-]?)?[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number");
 
 /** Honeypot + minimum-dwell-time anti-spam, shared by all public forms. */
+/** Slug of the first blog post the visitor read (see lib/store blogAttribution). */
+const blogSlug = z.string().max(160).optional();
+
 export const antiSpam = {
   website: z.string().max(0, "Spam detected").optional().or(z.literal("")),
   startedAt: z.coerce.number().optional(),
@@ -33,6 +36,7 @@ export const enquirySchema = z.object({
   listingSlug: z.string().max(120).optional(),
   companyName: z.string().max(120).optional(),
   utm: z.record(z.string(), z.string()).optional(),
+  blogSlug,
   ...antiSpam,
 });
 
@@ -43,6 +47,7 @@ export const visitSchema = z.object({
   email: z.string().trim().email().or(z.literal("")).optional(),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   slot: z.string().min(1).max(40),
+  blogSlug,
   ...antiSpam,
 });
 
@@ -55,6 +60,7 @@ export const meetingRoomSchema = z.object({
   startTime: z.string().regex(/^\d{2}:\d{2}$/),
   hours: z.coerce.number().int().min(1).max(12),
   attendees: z.coerce.number().int().min(1).max(200),
+  blogSlug,
   ...antiSpam,
 });
 

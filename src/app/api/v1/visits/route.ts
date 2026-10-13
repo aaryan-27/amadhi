@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { visitSchema, isTooFast } from "@/lib/validation";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
-import { sendLeadToCrm } from "@/lib/crm";
+import { findBlogPost, sendLeadToCrm } from "@/lib/crm";
 
 export async function POST(req: Request) {
   if (!rateLimit(`visits:${clientIp(req)}`, 6, 60_000)) {
@@ -18,7 +18,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const listing = await db.listing.findUnique({ where: { slug: d.listingSlug } });
+  const [listing, blogPost] = await Promise.all([
+    db.listing.findUnique({ where: { slug: d.listingSlug } }),
+    findBlogPost(d.blogSlug),
+  ]);
   if (!listing) return NextResponse.json({ error: "Listing not found" }, { status: 404 });
 
   const visit = await db.visitBooking.create({
@@ -43,6 +46,7 @@ export async function POST(req: Request) {
       listingId: listing.id,
       cityId: listing.cityId,
       localityId: listing.localityId,
+      utmJson: JSON.stringify(blogPost ? { blog_post: blogPost.slug } : {}),
       slaDueAt: new Date(Date.now() + 3600_000),
     },
   });
@@ -67,6 +71,7 @@ export async function POST(req: Request) {
     visitDate: d.date,
     visitSlot: d.slot,
     landingPage: req.headers.get("referer"),
+    blogPost,
   });
 
   return NextResponse.json({ ok: true, id: visit.id }, { status: 201 });

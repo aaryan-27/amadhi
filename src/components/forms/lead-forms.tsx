@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { CheckCircle2, ChevronLeft, Download, Loader2 } from "lucide-react";
 import { PRODUCTS, CITIES } from "@/lib/site";
-import { captureUtm } from "@/lib/store";
+import { blogAttribution, captureUtm } from "@/lib/store";
 import { Button } from "@/components/ui/primitives";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +13,8 @@ async function submitLead(path: string, payload: Record<string, unknown>) {
   const res = await fetch(path, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    // Every lead form carries the blog article that brought the visitor, if any.
+    body: JSON.stringify({ blogSlug: blogAttribution(), ...payload }),
   });
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));

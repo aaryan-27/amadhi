@@ -107,3 +107,32 @@ export function captureUtm(): Record<string, string> {
     return {};
   }
 }
+
+/**
+ * Blog attribution: remember the first article a visitor reads, for 30 days,
+ * so a lead submitted later from any page is credited to that article.
+ */
+const BLOG_KEY = "amadhi:blog";
+const BLOG_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
+
+export function rememberBlogVisit(slug: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const current = JSON.parse(localStorage.getItem(BLOG_KEY) ?? "null");
+    if (current?.slug && Date.now() - current.at < BLOG_WINDOW_MS) return;
+    localStorage.setItem(BLOG_KEY, JSON.stringify({ slug, at: Date.now() }));
+  } catch {
+    // Storage blocked (private mode etc.): attribution is best-effort.
+  }
+}
+
+export function blogAttribution(): string | undefined {
+  if (typeof window === "undefined") return undefined;
+  try {
+    const current = JSON.parse(localStorage.getItem(BLOG_KEY) ?? "null");
+    if (current?.slug && Date.now() - current.at < BLOG_WINDOW_MS) return current.slug;
+  } catch {
+    // ignore
+  }
+  return undefined;
+}

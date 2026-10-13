@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { enquirySchema, isTooFast } from "@/lib/validation";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
-import { sendLeadToCrm } from "@/lib/crm";
+import { findBlogPost, sendLeadToCrm } from "@/lib/crm";
 
 /** First-response SLA: 1 hour from lead creation. */
 const SLA_MS = 60 * 60 * 1000;
@@ -27,9 +27,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const [city, listing] = await Promise.all([
+  const [city, listing, blogPost] = await Promise.all([
     d.citySlug ? db.city.findUnique({ where: { slug: d.citySlug } }) : null,
     d.listingSlug ? db.listing.findUnique({ where: { slug: d.listingSlug } }) : null,
+    findBlogPost(d.blogSlug),
   ]);
   const locality =
     d.localitySlug && city
@@ -59,7 +60,7 @@ export async function POST(req: Request) {
       localityId: locality?.id,
       listingId: listing?.id,
       companyId,
-      utmJson: JSON.stringify(d.utm ?? {}),
+      utmJson: JSON.stringify({ ...d.utm, ...(blogPost ? { blog_post: blogPost.slug } : {}) }),
       slaDueAt: new Date(Date.now() + SLA_MS),
     },
   });
@@ -90,6 +91,7 @@ export async function POST(req: Request) {
     listing: listing ? { name: listing.name, slug: listing.slug } : null,
     utm: d.utm,
     landingPage: req.headers.get("referer"),
+    blogPost,
   });
 
   return NextResponse.json({ ok: true, id: lead.id }, { status: 201 });

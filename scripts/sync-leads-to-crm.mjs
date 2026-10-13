@@ -63,6 +63,10 @@ function parseJson(text, fallback) {
 
 let created = 0, skipped = 0, failed = 0;
 for (const lead of leads) {
+  const utm = parseJson(lead.utmJson, {});
+  const blog = utm.blog_post
+    ? await db.blogPost.findUnique({ where: { slug: utm.blog_post }, include: { category: true } })
+    : null;
   const body = {
     backfill: true,
     website_lead_id: lead.id,
@@ -83,7 +87,9 @@ for (const lead of leads) {
     locality: lead.locality?.name ?? null,
     space: lead.listing?.name ?? null,
     space_url: lead.listing ? `${SITE_DOMAIN}/spaces/${lead.listing.slug}` : null,
-    utm: parseJson(lead.utmJson, {}),
+    utm,
+    blog_post: blog?.title ?? null,
+    blog_url: blog ? `${SITE_DOMAIN}/blog/${blog.category.slug}/${blog.slug}` : null,
   };
   try {
     const res = await fetch(`${CRM_URL}/api/method/amadhi_crm.api.website_lead`, {
